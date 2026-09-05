@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+jinja2
+pydantic
+pymongo
+requests
+httpx
+python-dotenv
+langgraph

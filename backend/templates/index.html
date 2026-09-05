@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Smart Hajj Guardian</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            color: #1d2939;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 28px;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #667085;
+            margin-bottom: 22px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .real {
+            border-top: 5px solid #12b76a;
+        }
+
+        .agent {
+            border-top: 5px solid #6172f3;
+        }
+
+        .optional {
+            border-top: 5px solid #f79009;
+        }
+
+        .system {
+            border-top: 5px solid #98a2b3;
+        }
+
+        label {
+            display: block;
+            margin-top: 8px;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 9px;
+            border: 1px solid #d0d5dd;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 12px;
+            padding: 10px 14px;
+            cursor: pointer;
+            border: 1px solid #98a2b3;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        button:hover {
+            background: #f2f4f7;
+        }
+
+        .badge {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .green {
+            color: #039855;
+        }
+
+        .blue {
+            color: #444ce7;
+        }
+
+        .orange {
+            color: #dc6803;
+        }
+
+        .gray {
+            color: #667085;
+        }
+
+        pre {
+            background: #101828;
+            color: #f2f4f7;
+            padding: 18px;
+            border-radius: 10px;
+            min-height: 260px;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+
+        /* ==========================================
+           AGENCY COMMAND CENTER
+        ========================================== */
+
+        .command-center {
+            background: #ffffff;
+            border: 1px solid #e4e7ec;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 14px rgba(16, 24, 40, 0.05);
+        }
+
+        .command-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .command-header h2 {
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }
+
+        .command-description {
+            margin: 0;
+            color: #667085;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: #f9fafb;
+            border: 1px solid #eaecf0;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 30px;
+            margin-top: 8px;
+        }
+
+        .stat-label {
+            color: #667085;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .incident-section {
+            border-top: 1px solid #eaecf0;
+            padding-top: 20px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .section-heading h3 {
+            margin: 0 0 4px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .status-indicator {
+            background: #f2f4f7;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .incident-card {
+            border: 1px solid #fda29b;
+            background: #fffbfa;
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 12px;
+        }
+
+        .incident-card h3 {
+            margin-top: 0;
+        }
+
+        .incident-meta {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .incident-meta div {
+            background: #ffffff;
+            border: 1px solid #eaecf0;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .incident-meta span {
+            display: block;
+            color: #667085;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .incident-actions {
+            margin-top: 14px;
+        }
+
+        .incident-actions button {
+            margin-right: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: #667085;
+            background: #f9fafb;
+            border-radius: 10px;
+        }
+
+        .developer-divider {
+            display: flex;
+            align-items: center;
+            margin: 34px 0 20px;
+            color: #667085;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .developer-divider::before,
+        .developer-divider::after {
+            content: "";
+            height: 1px;
+            background: #d0d5dd;
+            flex: 1;
+        }
+
+        .developer-divider span {
+            padding: 0 14px;
+        }
+
+        @media (max-width: 800px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .incident-meta {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .command-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Smart Hajj Guardian</h1>
+
+    <div class="subtitle">
+        Real Nokia network intelligence + LangGraph multi-agent safety orchestration
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- AGENCY COMMAND CENTER -->
+    <!-- ========================================== -->
+
+    <section class="command-center">
+
+        <div class="command-header">
+
+            <div>
+                <span class="badge blue">
+                    AGENCY OPERATIONS
+                </span>
+
+                <h2>
+                    Agency Command Center
+                </h2>
+
+                <p class="command-description">
+                    Real-time safety visibility across Hajj groups and pilgrims.
+                </p>
+            </div>
+
+            <button onclick="refreshCommandCenter()">
+                Refresh Dashboard
+            </button>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <span class="stat-label">Groups</span>
+                <strong id="statGroups">—</strong>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">Pilgrims</span>
+                <strong id="statPilgrims">—</strong>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">Active Incidents</span>
+                <strong id="statIncidents">—</strong>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">Critical</span>
+                <strong id="statCritical">—</strong>
+            </div>
+
+        </div>
+
+
+        <div class="incident-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h3>Active Safety Incidents</h3>
+
+                    <p>
+                        Incidents requiring guide or agency attention.
+                    </p>
+                </div>
+
+                <span
+                    id="incidentStatus"
+                    class="status-indicator"
+                >
+                    Loading...
+                </span>
+
+            </div>
+
+            <div id="incidentList">
+                Loading incidents...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="developer-divider">
+        <span>DEVELOPER & DEMO TOOLS</span>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- EXISTING DEVELOPMENT TOOLS -->
+    <!-- ========================================== -->
+
+    <div class="grid">
+
+
+        <!-- GUARDIAN / RISK AGENT -->
+
+        <div class="card agent">
+
+            <span class="badge blue">
+                LANGGRAPH SUPERVISOR + RISK AGENT
+            </span>
+
+            <h2>
+                Analyze Pilgrim Risk
+            </h2>
+
+            <label>
+                Pilgrim phone
+            </label>
+
+            <input
+                id="guardianPhone"
+                value="+99999991000"
+            >
+
+            <label>
+                Distance from group (m)
+            </label>
+
+            <input
+                id="guardianDistance"
+                type="number"
+                value="450"
+            >
+
+            <label>
+                Safe-area scenario
+            </label>
+
+            <select id="guardianScenario">
+
+                <option value="inside">
+                    Inside safe area
+                </option>
+
+                <option
+                    value="outside"
+                    selected
+                >
+                    Outside safe area
+                </option>
+
+            </select>
+
+            <button onclick="analyzeGuardian()">
+                Run Guardian
+            </button>
+
+        </div>
+
+
+        <!-- EMERGENCY AGENT -->
+
+        <div class="card agent">
+
+            <span class="badge blue">
+                EMERGENCY AGENT
+            </span>
+
+            <h2>
+                Emergency SOS
+            </h2>
+
+            <label>
+                QoD validated device
+            </label>
+
+            <input
+                id="sosPhone"
+                value="+99999991001"
+            >
+
+            <label>
+                Distance from group (m)
+            </label>
+
+            <input
+                id="sosDistance"
+                type="number"
+                value="800"
+            >
+
+            <button onclick="triggerSOS()">
+                Trigger SOS → Real QoD
+            </button>
+
+        </div>
+
+
+        <!-- MEMORY AGENT -->
+
+        <div class="card agent">
+
+            <span class="badge blue">
+                MEMORY AGENT
+            </span>
+
+            <h2>
+                Guardian Memory
+            </h2>
+
+            <label>
+                Phone number
+            </label>
+
+            <input
+                id="memoryPhone"
+                value="+99999991000"
+            >
+
+            <button onclick="viewMemory()">
+                View Memory
+            </button>
+
+            <button onclick="clearMemory()">
+                Clear Memory
+            </button>
+
+        </div>
+
+
+        <!-- REAL LOCATION VERIFICATION -->
+
+        <div class="card real">
+
+            <span class="badge green">
+                REAL NOKIA
+            </span>
+
+            <h2>
+                Location Verification
+            </h2>
+
+            <label>
+                Phone
+            </label>
+
+            <input
+                id="verifyPhone"
+                value="+99999991000"
+            >
+
+            <label>
+                Scenario
+            </label>
+
+            <select id="verifyScenario">
+
+                <option value="inside">
+                    Expected TRUE
+                </option>
+
+                <option
+                    value="outside"
+                    selected
+                >
+                    Expected FALSE
+                </option>
+
+            </select>
+
+            <button onclick="verifyLocation()">
+                Verify Safe Area
+            </button>
+
+        </div>
+
+
+        <!-- REAL REACHABILITY -->
+
+        <div class="card real">
+
+            <span class="badge green">
+                REAL NOKIA
+            </span>
+
+            <h2>
+                Device Reachability
+            </h2>
+
+            <label>
+                Phone
+            </label>
+
+            <input
+                id="reachPhone"
+                value="+99999991000"
+            >
+
+            <button onclick="checkReachability()">
+                Check Reachability
+            </button>
+
+        </div>
+
+
+        <!-- REAL CONGESTION -->
+
+        <div class="card real">
+
+            <span class="badge green">
+                REAL NOKIA
+            </span>
+
+            <h2>
+                Congestion Insights
+            </h2>
+
+            <label>
+                Validated simulator device
+            </label>
+
+            <input
+                id="congestionPhone"
+                value="+36719991000"
+            >
+
+            <button onclick="queryCongestion()">
+                Query Congestion
+            </button>
+
+        </div>
+
+
+        <!-- OPTIONAL LOCATION RETRIEVAL -->
+
+        <div class="card optional">
+
+            <span class="badge orange">
+                OPTIONAL
+            </span>
+
+            <h2>
+                Location Retrieval
+            </h2>
+
+            <label>
+                Phone
+            </label>
+
+            <input
+                id="locationPhone"
+                value="+99999991000"
+            >
+
+            <button onclick="retrieveLocation()">
+                Try Location Retrieval
+            </button>
+
+        </div>
+
+
+        <!-- SYSTEM STATE -->
+
+        <div class="card system">
+
+            <span class="badge gray">
+                SYSTEM
+            </span>
+
+            <h2>
+                System State
+            </h2>
+
+            <button onclick="viewPilgrims()">
+                View Pilgrim States
+            </button>
+
+            <button onclick="clearCache()">
+                Clear Telecom Cache
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <h2>
+        Response
+    </h2>
+
+    <pre id="output">Ready.</pre>
+
+</div>
+
+
+<script>
+
+const output =
+    document.getElementById(
+        "output"
+    );
+
+
+function value(id) {
+
+    return document
+        .getElementById(id)
+        .value;
+}
+
+
+function safeArea(scenario) {
+
+    if (scenario === "outside") {
+
+        return {
+            latitude: 50.735851,
+            longitude: 7.10066,
+            radius: 50000
+        };
+    }
+
+    return {
+        latitude: 47.48627616952785,
+        longitude: 19.07915612501993,
+        radius: 50000
+    };
+}
+
+
+async function request(
+    url,
+    options = {}
+) {
+
+    output.textContent =
+        "Loading...";
+
+    try {
+
+        const response =
+            await fetch(
+                url,
+                options
+            );
+
+        let data;
+
+        try {
+            data =
+                await response.json();
+        }
+
+        catch {
+            data =
+                await response.text();
+        }
+
+        const result = {
+            status:
+                response.status,
+
+            data:
+                data
+        };
+
+        output.textContent =
+            JSON.stringify(
+                result,
+                null,
+                2
+            );
+
+        return result;
+    }
+
+    catch (error) {
+
+        output.textContent =
+            JSON.stringify(
+                {
+                    error:
+                        String(error)
+                },
+                null,
+                2
+            );
+
+        return null;
+    }
+}
+
+
+function post(
+    url,
+    body
+) {
+
+    return request(
+        url,
+        {
+            method:
+                "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+
+            body:
+                JSON.stringify(
+                    body
+                )
+        }
+    );
+}
+
+
+function getRequest(url) {
+
+    return request(url);
+}
+
+
+function deleteRequest(url) {
+
+    return request(
+        url,
+        {
+            method:
+                "DELETE"
+        }
+    );
+}
+
+
+/* ==========================================
+   GUARDIAN
+========================================== */
+
+function analyzeGuardian() {
+
+    const scenario =
+        value(
+            "guardianScenario"
+        );
+
+    const distance =
+        value(
+            "guardianDistance"
+        );
+
+    return post(
+        "/api/guardian/analyze",
+        {
+            phone_number:
+                value(
+                    "guardianPhone"
+                ),
+
+            distance_from_group_m:
+                distance === ""
+                    ? null
+                    : Number(
+                        distance
+                    ),
+
+            safe_area:
+                safeArea(
+                    scenario
+                ),
+
+            max_location_age:
+                120
+        }
+    );
+}
+
+
+/* ==========================================
+   SOS
+========================================== */
+
+function triggerSOS() {
+
+    const distance =
+        value(
+            "sosDistance"
+        );
+
+    return post(
+        "/api/guardian/sos",
+        {
+            phone_number:
+                value(
+                    "sosPhone"
+                ),
+
+            distance_from_group_m:
+                distance === ""
+                    ? null
+                    : Number(
+                        distance
+                    ),
+
+            safe_area:
+                safeArea(
+                    "outside"
+                )
+        }
+    );
+}
+
+
+/* ==========================================
+   LOCATION VERIFICATION
+========================================== */
+
+function verifyLocation() {
+
+    const scenario =
+        value(
+            "verifyScenario"
+        );
+
+    return post(
+        "/api/location/verify",
+        {
+            phone_number:
+                value(
+                    "verifyPhone"
+                ),
+
+            area:
+                safeArea(
+                    scenario
+                ),
+
+            max_age:
+                120
+        }
+    );
+}
+
+
+/* ==========================================
+   REACHABILITY
+========================================== */
+
+function checkReachability() {
+
+    return post(
+        "/api/reachability",
+        {
+            phone_number:
+                value(
+                    "reachPhone"
+                )
+        }
+    );
+}
+
+
+/* ==========================================
+   CONGESTION
+========================================== */
+
+function queryCongestion() {
+
+    return post(
+        "/api/congestion/query",
+        {
+            phone_number:
+                value(
+                    "congestionPhone"
+                )
+        }
+    );
+}
+
+
+/* ==========================================
+   LOCATION RETRIEVAL
+========================================== */
+
+function retrieveLocation() {
+
+    return post(
+        "/api/location",
+        {
+            phone_number:
+                value(
+                    "locationPhone"
+                ),
+
+            max_age:
+                600
+        }
+    );
+}
+
+
+/* ==========================================
+   PILGRIM STATE
+========================================== */
+
+function viewPilgrims() {
+
+    return getRequest(
+        "/api/pilgrims"
+    );
+}
+
+
+/* ==========================================
+   MEMORY
+========================================== */
+
+function viewMemory() {
+
+    return getRequest(
+        "/api/memory/"
+        +
+        encodeURIComponent(
+            value(
+                "memoryPhone"
+            )
+        )
+    );
+}
+
+
+function clearMemory() {
+
+    return deleteRequest(
+        "/api/memory"
+    );
+}
+
+
+/* ==========================================
+   CACHE
+========================================== */
+
+function clearCache() {
+
+    return deleteRequest(
+        "/api/cache"
+    );
+}
+
+
+/* ==========================================
+   COMMAND CENTER
+   API wiring comes in Step 10.2
+========================================== */
+
+function refreshCommandCenter() {
+
+    document.getElementById(
+        "incidentStatus"
+    ).textContent =
+        "API connection next step";
+
+    document.getElementById(
+        "incidentList"
+    ).innerHTML =
+        `
+        <div class="empty-state">
+            Command Center UI ready.
+            API wiring will be connected in Step 10.2.
+        </div>
+        `;
+}
+
+</script>
+
+</body>
+</html>

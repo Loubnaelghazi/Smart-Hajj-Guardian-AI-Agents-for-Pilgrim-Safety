@@ -1,0 +1,16 @@
+.language-switch { min-width: 88px; font-weight: 700; white-space: nowrap; }
+[dir="rtl"] body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
+[dir="rtl"] .sidebar { right: 0; left: auto; border-right: 0; border-left: 1px solid #e2e8f0; }
+[dir="rtl"] .data-table th, [dir="rtl"] .data-table td,
+[dir="rtl"] .sidebar-link, [dir="rtl"] .tracking-person,
+[dir="rtl"] .notification-item { text-align: right; }
+[dir="rtl"] .back-button svg { transform: scaleX(-1); }
+[dir="rtl"] .panel-kicker, [dir="rtl"] .topbar-kicker,
+[dir="rtl"] .hero-label, [dir="rtl"] .sidebar-section-label { letter-spacing: 0; }
+input[type="email"], input[type="tel"], input[type="number"] { direction: ltr; text-align: start; }
+.leaflet-container { direction: ltr; }
+.topbar-actions { flex-wrap: wrap; }
+[dir="rtl"] .sidebar-badge { margin-left: 0; margin-right: auto; }
+[dir="rtl"] .notification-panel { right: auto; left: 0; }
+[dir="rtl"] .alert-toast { right: auto; left: 24px; }
+[dir="rtl"] .incident-card-actions { margin-right: 0; margin-left: auto; }

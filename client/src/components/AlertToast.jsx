@@ -1,4 +1,4 @@
-import { AlertTriangle, X } from "lucide-react";
+import { t } from "../i18n";import { AlertTriangle, X } from "lucide-react";
 
 export default function AlertToast({ incident, onClose, onOpen }) {
   if (!incident) return null;
@@ -10,26 +10,26 @@ export default function AlertToast({ incident, onClose, onOpen }) {
       </div>
 
       <div className="alert-toast-copy">
-        <span>NEW GUARDIAN ALERT</span>
-        <strong>{incident.type || "Safety incident detected"}</strong>
-        <small>
-          Risk: {String(incident.risk_level || "UNKNOWN").toUpperCase()}
-          {" · "}
-          Score {incident.risk_score ?? "—"}
+        <span>{t("NEW GUARDIAN ALERT")}</span>
+        <strong>{t(incident.type || "Safety incident detected")}</strong>
+        <small>{t(" Risk: ")}
+          {t(String(incident.risk_level || "UNKNOWN").toUpperCase())}
+          {t(" · ")}{t(" Score ")}
+          {t(incident.risk_score ?? "—")}
         </small>
       </div>
 
-      <button className="toast-view-btn" onClick={onOpen}>
-        View
+      <button className="toast-view-btn" onClick={onOpen}>{t(" View ")}
+
       </button>
 
       <button
         className="toast-close-btn"
         onClick={onClose}
-        aria-label="Close alert"
-      >
+        aria-label={t("Close alert")}>
+
         <X size={15} />
       </button>
-    </div>
-  );
+    </div>);
+
 }

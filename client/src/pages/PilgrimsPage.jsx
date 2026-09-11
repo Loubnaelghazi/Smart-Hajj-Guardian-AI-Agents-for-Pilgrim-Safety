@@ -1,19 +1,19 @@
-import { useMemo, useState } from "react";
+import { t } from "../i18n";import { useMemo, useState } from "react";
 import {
   Eye,
   Pencil,
   Search,
   Smartphone,
   Trash2,
-  Users,
-} from "lucide-react";
+  Users } from
+"lucide-react";
 import Modal from "../components/Modal";
 import { api } from "../services/api";
 
 export default function PilgrimsPage({
   overview,
   refresh,
-  onOpenGroup,
+  onOpenGroup
 }) {
   const pilgrims = overview?.pilgrims || [];
   const groups = overview?.groups || [];
@@ -24,7 +24,7 @@ export default function PilgrimsPage({
     name: "",
     phone_number: "",
     nationality: "",
-    group_id: "",
+    group_id: ""
   });
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -34,11 +34,11 @@ export default function PilgrimsPage({
     if (!q) return pilgrims;
 
     return pilgrims.filter((p) =>
-      [p.name, p.phone_number, p.nationality, p.id]
-        .filter(Boolean)
-        .some((value) =>
-          String(value).toLowerCase().includes(q)
-        )
+    [p.name, p.phone_number, p.nationality, p.id].
+    filter(Boolean).
+    some((value) =>
+    String(value).toLowerCase().includes(q)
+    )
     );
   }, [pilgrims, query]);
 
@@ -48,7 +48,7 @@ export default function PilgrimsPage({
       name: pilgrim.name || "",
       phone_number: pilgrim.phone_number || "",
       nationality: pilgrim.nationality || "",
-      group_id: pilgrim.group_id || "",
+      group_id: pilgrim.group_id || ""
     });
     setError("");
   }
@@ -63,7 +63,7 @@ export default function PilgrimsPage({
         name: form.name,
         phone_number: form.phone_number,
         nationality: form.nationality || null,
-        group_id: form.group_id,
+        group_id: form.group_id
       });
       await refresh();
       setEditing(null);
@@ -75,13 +75,13 @@ export default function PilgrimsPage({
   }
 
   async function remove(pilgrim) {
-    if (!confirm(`Delete pilgrim "${pilgrim.name}"?`)) return;
+    if (!confirm(t(`Delete pilgrim "${pilgrim.name}"?`))) return;
 
     try {
       await api.deletePilgrim(pilgrim.id);
       await refresh();
     } catch (e) {
-      alert(e.message);
+      alert(t(e.message));
     }
   }
 
@@ -90,8 +90,8 @@ export default function PilgrimsPage({
       <section className="panel">
         <div className="panel-heading panel-heading-search">
           <div>
-            <span className="panel-kicker">PILGRIM REGISTRY</span>
-            <h2>Protected pilgrims</h2>
+            <span className="panel-kicker">{t("PILGRIM REGISTRY")}</span>
+            <h2>{t("Protected pilgrims")}</h2>
           </div>
 
           <label className="search-box">
@@ -99,8 +99,8 @@ export default function PilgrimsPage({
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search name, phone, nationality..."
-            />
+              placeholder={t("Search name, phone, nationality...")} />
+
           </label>
         </div>
 
@@ -108,16 +108,16 @@ export default function PilgrimsPage({
           <table className="data-table">
             <thead>
               <tr>
-                <th>Pilgrim</th>
-                <th>Phone</th>
-                <th>Group</th>
-                <th>Nationality</th>
-                <th>Guardian</th>
-                <th className="actions-column">Actions</th>
+                <th>{t("Pilgrim")}</th>
+                <th>{t("Phone")}</th>
+                <th>{t("Group")}</th>
+                <th>{t("Nationality")}</th>
+                <th>{t("Guardian")}</th>
+                <th className="actions-column">{t("Actions")}</th>
               </tr>
             </thead>
             <tbody>
-              {filtered.map((pilgrim) => {
+              {t(filtered.map((pilgrim) => {
                 const group = groups.find(
                   (g) => g.id === pilgrim.group_id
                 );
@@ -127,7 +127,7 @@ export default function PilgrimsPage({
                     <td>
                       <div className="entity-cell">
                         <div className="entity-avatar">
-                          {(pilgrim.name || "P")[0]}
+                          {t((pilgrim.name || "P")[0])}
                         </div>
                         <div>
                           <strong>{pilgrim.name}</strong>
@@ -144,122 +144,122 @@ export default function PilgrimsPage({
                     <td>
                       <span className="table-inline">
                         <Users size={15} />
-                        {group?.name || pilgrim.group_id}
+                        {t(group?.name || pilgrim.group_id)}
                       </span>
                     </td>
-                    <td>{pilgrim.nationality || "—"}</td>
+                    <td>{t(pilgrim.nationality || "—")}</td>
                     <td>
                       <span className="status-live">
-                        <span />
-                        Protected
+                        <span />{t(" Protected ")}
+
                       </span>
                     </td>
                     <td className="row-actions">
                       <button
                         className="table-action"
-                        title="Open group"
-                        onClick={() => onOpenGroup(pilgrim.group_id)}
-                      >
+                        title={t("Open group")}
+                        onClick={() => onOpenGroup(pilgrim.group_id)}>
+
                         <Eye size={15} />
                       </button>
                       <button
                         className="table-action"
-                        title="Edit"
-                        onClick={() => openEdit(pilgrim)}
-                      >
+                        title={t("Edit")}
+                        onClick={() => openEdit(pilgrim)}>
+
                         <Pencil size={15} />
                       </button>
                       <button
                         className="table-action danger"
-                        title="Delete"
-                        onClick={() => remove(pilgrim)}
-                      >
+                        title={t("Delete")}
+                        onClick={() => remove(pilgrim)}>
+
                         <Trash2 size={15} />
                       </button>
                     </td>
-                  </tr>
-                );
-              })}
+                  </tr>);
+
+              }))}
             </tbody>
           </table>
         </div>
       </section>
 
-      {editing && (
-        <Modal title="Edit pilgrim" onClose={() => setEditing(null)}>
+      {t(editing &&
+      <Modal title={t("Edit pilgrim")} onClose={() => setEditing(null)}>
           <form className="form-stack" onSubmit={save}>
-            {error && <div className="form-error">{error}</div>}
+            {t(error && <div className="form-error">{t(error)}</div>)}
 
-            <label>
-              Full name
-              <input
-                required
-                value={form.name}
-                onChange={(e) =>
-                  setForm({ ...form, name: e.target.value })
-                }
-              />
+            <label>{t(" Full name ")}
+
+            <input
+              required
+              value={form.name}
+              onChange={(e) =>
+              setForm({ ...form, name: e.target.value })
+              } />
+
             </label>
 
-            <label>
-              Phone
-              <input
-                required
-                value={form.phone_number}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    phone_number: e.target.value,
-                  })
-                }
-              />
+            <label>{t(" Phone ")}
+
+            <input
+              required
+              value={form.phone_number}
+              onChange={(e) =>
+              setForm({
+                ...form,
+                phone_number: e.target.value
+              })
+              } />
+
             </label>
 
-            <label>
-              Nationality
-              <input
-                value={form.nationality}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    nationality: e.target.value,
-                  })
-                }
-              />
+            <label>{t(" Nationality ")}
+
+            <input
+              value={form.nationality}
+              onChange={(e) =>
+              setForm({
+                ...form,
+                nationality: e.target.value
+              })
+              } />
+
             </label>
 
-            <label>
-              Group
-              <select
-                required
-                value={form.group_id}
-                onChange={(e) =>
-                  setForm({ ...form, group_id: e.target.value })
-                }
-              >
-                {groups.map((group) => (
-                  <option key={group.id} value={group.id}>
+            <label>{t(" Group ")}
+
+            <select
+              required
+              value={form.group_id}
+              onChange={(e) =>
+              setForm({ ...form, group_id: e.target.value })
+              }>
+
+                {t(groups.map((group) =>
+              <option key={group.id} value={group.id}>
                     {group.name}
                   </option>
-                ))}
+              ))}
               </select>
             </label>
 
             <div className="modal-actions">
               <button
-                type="button"
-                className="secondary-btn"
-                onClick={() => setEditing(null)}
-              >
-                Cancel
-              </button>
+              type="button"
+              className="secondary-btn"
+              onClick={() => setEditing(null)}>{t(" Cancel ")}
+
+
+            </button>
               <button className="primary-btn" disabled={busy}>
-                {busy ? "Saving..." : "Save pilgrim"}
+                {t(busy ? "Saving..." : "Save pilgrim")}
               </button>
             </div>
           </form>
-        </Modal>
-      )}
-    </div>
-  );
+        </Modal>)
+      }
+    </div>);
+
 }

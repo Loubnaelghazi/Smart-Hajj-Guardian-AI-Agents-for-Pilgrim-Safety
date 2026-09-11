@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { t } from "../i18n";import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
   MapPin,
@@ -6,29 +6,29 @@ import {
   Plus,
   ShieldCheck,
   Trash2,
-  UserRound,
-} from "lucide-react";
+  UserRound } from
+"lucide-react";
 import Modal from "../components/Modal";
 import { api } from "../services/api";
 
 const pilgrimEmpty = {
   name: "",
   phone_number: "",
-  nationality: "",
+  nationality: ""
 };
 
 const zoneEmpty = {
   name: "",
   latitude: "",
   longitude: "",
-  radius_m: 250,
+  radius_m: 250
 };
 
 export default function GroupDetailsPage({
   groupId,
   overview,
   refresh,
-  onBack,
+  onBack
 }) {
   const [details, setDetails] = useState(null);
   const [pilgrims, setPilgrims] = useState([]);
@@ -43,18 +43,18 @@ export default function GroupDetailsPage({
 
   async function load() {
     const [groupData, pilgrimData] = await Promise.all([
-      api.getGroup(groupId),
-      api.listGroupPilgrims(groupId),
-    ]);
+    api.getGroup(groupId),
+    api.listGroupPilgrims(groupId)]
+    );
 
     setDetails(groupData);
     setPilgrims(pilgrimData);
 
-const safeZoneResponse = await api.getSafeZone(groupId);
+    const safeZoneResponse = await api.getSafeZone(groupId);
 
-setSafeZone(
-  safeZoneResponse?.safe_zone || null
-);
+    setSafeZone(
+      safeZoneResponse?.safe_zone || null
+    );
   }
 
   useEffect(() => {
@@ -67,8 +67,8 @@ setSafeZone(
 
   const group = details.group || details;
   const guide =
-    details.guide ||
-    guides.find((item) => item.id === group.guide_id);
+  details.guide ||
+  guides.find((item) => item.id === group.guide_id);
 
   function openAddPilgrim() {
     setPilgrimForm(pilgrimEmpty);
@@ -80,7 +80,7 @@ setSafeZone(
     setPilgrimForm({
       name: pilgrim.name || "",
       phone_number: pilgrim.phone_number || "",
-      nationality: pilgrim.nationality || "",
+      nationality: pilgrim.nationality || ""
     });
     setError("");
     setModal({ type: "edit-pilgrim", pilgrim });
@@ -88,14 +88,14 @@ setSafeZone(
 
   function openZone() {
     setZoneForm(
-      safeZone
-        ? {
-            name: safeZone.name || "",
-            latitude: safeZone.latitude,
-            longitude: safeZone.longitude,
-            radius_m: safeZone.radius_m,
-          }
-        : zoneEmpty
+      safeZone ?
+      {
+        name: safeZone.name || "",
+        latitude: safeZone.latitude,
+        longitude: safeZone.longitude,
+        radius_m: safeZone.radius_m
+      } :
+      zoneEmpty
     );
     setError("");
     setModal({ type: "safe-zone" });
@@ -110,7 +110,7 @@ setSafeZone(
       const payload = {
         name: pilgrimForm.name,
         phone_number: pilgrimForm.phone_number,
-        nationality: pilgrimForm.nationality || null,
+        nationality: pilgrimForm.nationality || null
       };
 
       if (modal.type === "add-pilgrim") {
@@ -129,13 +129,13 @@ setSafeZone(
   }
 
   async function deletePilgrim(pilgrim) {
-    if (!confirm(`Delete pilgrim "${pilgrim.name}"?`)) return;
+    if (!confirm(t(`Delete pilgrim "${pilgrim.name}"?`))) return;
 
     try {
       await api.deletePilgrim(pilgrim.id);
       await Promise.all([load(), refresh()]);
     } catch (e) {
-      alert(e.message);
+      alert(t(e.message));
     }
   }
 
@@ -148,7 +148,7 @@ setSafeZone(
       name: zoneForm.name,
       latitude: Number(zoneForm.latitude),
       longitude: Number(zoneForm.longitude),
-      radius_m: Number(zoneForm.radius_m),
+      radius_m: Number(zoneForm.radius_m)
     };
 
     try {
@@ -168,45 +168,45 @@ setSafeZone(
   }
 
   async function deleteZone() {
-    if (!confirm("Delete this group's safe zone?")) return;
+    if (!confirm(t("Delete this group's safe zone?"))) return;
 
     try {
       await api.deleteSafeZone(groupId);
       await load();
     } catch (e) {
-      alert(e.message);
+      alert(t(e.message));
     }
   }
 
   return (
     <div className="page-stack">
       <button className="back-button" onClick={onBack}>
-        <ArrowLeft size={16} />
-        Back to groups
+        <ArrowLeft size={16} />{t(" Back to groups ")}
+
       </button>
 
       <section className="group-detail-hero">
         <div>
-          <span className="panel-kicker">GROUP OPERATIONS</span>
+          <span className="panel-kicker">{t("GROUP OPERATIONS")}</span>
           <h2>{group.name}</h2>
-          <p>{group.description || "No description provided."}</p>
+          <p>{t(group.description || "No description provided.")}</p>
         </div>
 
         <div className="group-detail-stats">
           <div>
             <ShieldCheck size={17} />
-            <span>Guide</span>
-            <strong>{guide?.name || "Unassigned"}</strong>
+            <span>{t("Guide")}</span>
+            <strong>{t(guide?.name || "Unassigned")}</strong>
           </div>
           <div>
             <UserRound size={17} />
-            <span>Pilgrims</span>
-            <strong>{pilgrims.length}</strong>
+            <span>{t("Pilgrims")}</span>
+            <strong>{t(pilgrims.length)}</strong>
           </div>
           <div>
             <MapPin size={17} />
-            <span>Safe zone</span>
-            <strong>{safeZone?.name || "Not configured"}</strong>
+            <span>{t("Safe zone")}</span>
+            <strong>{t(safeZone?.name || "Not configured")}</strong>
           </div>
         </div>
       </section>
@@ -214,46 +214,46 @@ setSafeZone(
       <section className="panel">
         <div className="panel-heading">
           <div>
-            <span className="panel-kicker">GROUP SAFETY AREA</span>
-            <h2>Safe zone</h2>
+            <span className="panel-kicker">{t("GROUP SAFETY AREA")}</span>
+            <h2>{t("Safe zone")}</h2>
           </div>
 
           <div className="heading-actions">
-            {safeZone && (
-              <button className="danger-text-btn" onClick={deleteZone}>
-                <Trash2 size={15} />
-                Delete
-              </button>
-            )}
+            {t(safeZone &&
+            <button className="danger-text-btn" onClick={deleteZone}>
+                <Trash2 size={15} />{t(" Delete ")}
+
+            </button>)
+            }
             <button className="secondary-btn" onClick={openZone}>
               <Pencil size={15} />
-              {safeZone ? "Edit safe zone" : "Configure safe zone"}
+              {t(safeZone ? "Edit safe zone" : "Configure safe zone")}
             </button>
           </div>
         </div>
 
-        {safeZone ? (
-          <div className="safe-zone-summary">
-            <div><span>Name</span><strong>{safeZone.name}</strong></div>
-            <div><span>Latitude</span><strong>{safeZone.latitude}</strong></div>
-            <div><span>Longitude</span><strong>{safeZone.longitude}</strong></div>
-            <div><span>Radius</span><strong>{safeZone.radius_m} m</strong></div>
-          </div>
-        ) : (
-          <div className="empty-small">No safe zone configured.</div>
-        )}
+        {t(safeZone ?
+        <div className="safe-zone-summary">
+            <div><span>{t("Name")}</span><strong>{safeZone.name}</strong></div>
+            <div><span>{t("Latitude")}</span><strong>{t(safeZone.latitude)}</strong></div>
+            <div><span>{t("Longitude")}</span><strong>{t(safeZone.longitude)}</strong></div>
+            <div><span>{t("Radius")}</span><strong>{t(safeZone.radius_m)}{t(" m")}</strong></div>
+          </div> :
+
+        <div className="empty-small">{t("No safe zone configured.")}</div>)
+        }
       </section>
 
       <section className="panel">
         <div className="panel-heading">
           <div>
-            <span className="panel-kicker">GROUP MEMBERS</span>
-            <h2>Pilgrims</h2>
+            <span className="panel-kicker">{t("GROUP MEMBERS")}</span>
+            <h2>{t("Pilgrims")}</h2>
           </div>
 
           <button className="primary-btn" onClick={openAddPilgrim}>
-            <Plus size={16} />
-            Add pilgrim
+            <Plus size={16} />{t(" Add pilgrim ")}
+
           </button>
         </div>
 
@@ -261,21 +261,21 @@ setSafeZone(
           <table className="data-table">
             <thead>
               <tr>
-                <th>Pilgrim</th>
-                <th>Phone</th>
-                <th>Nationality</th>
-                <th>Guardian</th>
-                <th className="actions-column">Actions</th>
+                <th>{t("Pilgrim")}</th>
+                <th>{t("Phone")}</th>
+                <th>{t("Nationality")}</th>
+                <th>{t("Guardian")}</th>
+                <th className="actions-column">{t("Actions")}</th>
               </tr>
             </thead>
 
             <tbody>
-              {pilgrims.map((pilgrim) => (
-                <tr key={pilgrim.id}>
+              {t(pilgrims.map((pilgrim) =>
+              <tr key={pilgrim.id}>
                   <td>
                     <div className="entity-cell">
                       <div className="entity-avatar">
-                        {(pilgrim.name || "P")[0]}
+                        {t((pilgrim.name || "P")[0])}
                       </div>
                       <div>
                         <strong>{pilgrim.name}</strong>
@@ -284,24 +284,24 @@ setSafeZone(
                     </div>
                   </td>
                   <td>{pilgrim.phone_number}</td>
-                  <td>{pilgrim.nationality || "—"}</td>
+                  <td>{t(pilgrim.nationality || "—")}</td>
                   <td>
                     <span className="status-live">
-                      <span />
-                      Protected
-                    </span>
+                      <span />{t(" Protected ")}
+
+                  </span>
                   </td>
                   <td className="row-actions">
                     <button
-                      className="table-action"
-                      onClick={() => openEditPilgrim(pilgrim)}
-                    >
+                    className="table-action"
+                    onClick={() => openEditPilgrim(pilgrim)}>
+
                       <Pencil size={15} />
                     </button>
                     <button
-                      className="table-action danger"
-                      onClick={() => deletePilgrim(pilgrim)}
-                    >
+                    className="table-action danger"
+                    onClick={() => deletePilgrim(pilgrim)}>
+
                       <Trash2 size={15} />
                     </button>
                   </td>
@@ -311,164 +311,164 @@ setSafeZone(
           </table>
         </div>
 
-        {pilgrims.length === 0 && (
-          <div className="empty-small">No pilgrims in this group.</div>
-        )}
+        {t(pilgrims.length === 0 &&
+        <div className="empty-small">{t("No pilgrims in this group.")}</div>)
+        }
       </section>
 
-      {modal?.type?.includes("pilgrim") && (
-        <Modal
-          title={
-            modal.type === "add-pilgrim"
-              ? "Add pilgrim"
-              : "Edit pilgrim"
-          }
-          onClose={() => setModal(null)}
-        >
+      {t(modal?.type?.includes("pilgrim") &&
+      <Modal
+        title={t(
+          modal.type === "add-pilgrim" ?
+          "Add pilgrim" :
+          "Edit pilgrim")
+        }
+        onClose={() => setModal(null)}>
+
           <form className="form-stack" onSubmit={savePilgrim}>
-            {error && <div className="form-error">{error}</div>}
+            {t(error && <div className="form-error">{t(error)}</div>)}
 
-            <label>
-              Full name
-              <input
-                required
-                value={pilgrimForm.name}
-                onChange={(e) =>
-                  setPilgrimForm({
-                    ...pilgrimForm,
-                    name: e.target.value,
-                  })
-                }
-              />
+            <label>{t(" Full name ")}
+
+            <input
+              required
+              value={pilgrimForm.name}
+              onChange={(e) =>
+              setPilgrimForm({
+                ...pilgrimForm,
+                name: e.target.value
+              })
+              } />
+
             </label>
 
-            <label>
-              Phone number
-              <input
-                required
-                value={pilgrimForm.phone_number}
-                onChange={(e) =>
-                  setPilgrimForm({
-                    ...pilgrimForm,
-                    phone_number: e.target.value,
-                  })
-                }
-              />
+            <label>{t(" Phone number ")}
+
+            <input
+              required
+              value={pilgrimForm.phone_number}
+              onChange={(e) =>
+              setPilgrimForm({
+                ...pilgrimForm,
+                phone_number: e.target.value
+              })
+              } />
+
             </label>
 
-            <label>
-              Nationality
-              <input
-                value={pilgrimForm.nationality}
-                onChange={(e) =>
-                  setPilgrimForm({
-                    ...pilgrimForm,
-                    nationality: e.target.value,
-                  })
-                }
-              />
+            <label>{t(" Nationality ")}
+
+            <input
+              value={pilgrimForm.nationality}
+              onChange={(e) =>
+              setPilgrimForm({
+                ...pilgrimForm,
+                nationality: e.target.value
+              })
+              } />
+
             </label>
 
             <div className="modal-actions">
               <button
-                type="button"
-                className="secondary-btn"
-                onClick={() => setModal(null)}
-              >
-                Cancel
-              </button>
+              type="button"
+              className="secondary-btn"
+              onClick={() => setModal(null)}>{t(" Cancel ")}
+
+
+            </button>
               <button className="primary-btn" disabled={busy}>
-                {busy ? "Saving..." : "Save pilgrim"}
+                {t(busy ? "Saving..." : "Save pilgrim")}
               </button>
             </div>
           </form>
-        </Modal>
-      )}
+        </Modal>)
+      }
 
-      {modal?.type === "safe-zone" && (
-        <Modal
-          title={safeZone ? "Edit safe zone" : "Configure safe zone"}
-          onClose={() => setModal(null)}
-        >
+      {t(modal?.type === "safe-zone" &&
+      <Modal
+        title={t(safeZone ? "Edit safe zone" : "Configure safe zone")}
+        onClose={() => setModal(null)}>
+
           <form className="form-stack" onSubmit={saveZone}>
-            {error && <div className="form-error">{error}</div>}
+            {t(error && <div className="form-error">{t(error)}</div>)}
 
-            <label>
-              Zone name
-              <input
-                required
-                value={zoneForm.name}
-                onChange={(e) =>
-                  setZoneForm({ ...zoneForm, name: e.target.value })
-                }
-              />
+            <label>{t(" Zone name ")}
+
+            <input
+              required
+              value={zoneForm.name}
+              onChange={(e) =>
+              setZoneForm({ ...zoneForm, name: e.target.value })
+              } />
+
             </label>
 
             <div className="form-grid-2">
-              <label>
-                Latitude
-                <input
-                  required
-                  type="number"
-                  step="any"
-                  value={zoneForm.latitude}
-                  onChange={(e) =>
-                    setZoneForm({
-                      ...zoneForm,
-                      latitude: e.target.value,
-                    })
-                  }
-                />
+              <label>{t(" Latitude ")}
+
+              <input
+                required
+                type="number"
+                step="any"
+                value={zoneForm.latitude}
+                onChange={(e) =>
+                setZoneForm({
+                  ...zoneForm,
+                  latitude: e.target.value
+                })
+                } />
+
               </label>
 
-              <label>
-                Longitude
-                <input
-                  required
-                  type="number"
-                  step="any"
-                  value={zoneForm.longitude}
-                  onChange={(e) =>
-                    setZoneForm({
-                      ...zoneForm,
-                      longitude: e.target.value,
-                    })
-                  }
-                />
+              <label>{t(" Longitude ")}
+
+              <input
+                required
+                type="number"
+                step="any"
+                value={zoneForm.longitude}
+                onChange={(e) =>
+                setZoneForm({
+                  ...zoneForm,
+                  longitude: e.target.value
+                })
+                } />
+
               </label>
             </div>
 
-            <label>
-              Radius (meters)
-              <input
-                required
-                min="1"
-                type="number"
-                value={zoneForm.radius_m}
-                onChange={(e) =>
-                  setZoneForm({
-                    ...zoneForm,
-                    radius_m: e.target.value,
-                  })
-                }
-              />
+            <label>{t(" Radius (meters) ")}
+
+            <input
+              required
+              min="1"
+              type="number"
+              value={zoneForm.radius_m}
+              onChange={(e) =>
+              setZoneForm({
+                ...zoneForm,
+                radius_m: e.target.value
+              })
+              } />
+
             </label>
 
             <div className="modal-actions">
               <button
-                type="button"
-                className="secondary-btn"
-                onClick={() => setModal(null)}
-              >
-                Cancel
-              </button>
+              type="button"
+              className="secondary-btn"
+              onClick={() => setModal(null)}>{t(" Cancel ")}
+
+
+            </button>
               <button className="primary-btn" disabled={busy}>
-                {busy ? "Saving..." : "Save safe zone"}
+                {t(busy ? "Saving..." : "Save safe zone")}
               </button>
             </div>
           </form>
-        </Modal>
-      )}
-    </div>
-  );
+        </Modal>)
+      }
+    </div>);
+
 }

@@ -1,19 +1,19 @@
-import { useMemo, useState } from "react";
+import { t } from "../i18n";import { useMemo, useState } from "react";
 import {
   Eye,
   Pencil,
   Plus,
   Trash2,
   Users,
-  ShieldCheck,
-} from "lucide-react";
+  ShieldCheck } from
+"lucide-react";
 import Modal from "../components/Modal";
 import { api, AGENCY_ID } from "../services/api";
 
 const emptyForm = {
   name: "",
   guide_id: "",
-  description: "",
+  description: ""
 };
 
 export default function GroupsPage({ overview, refresh, onOpenGroup }) {
@@ -36,7 +36,7 @@ export default function GroupsPage({ overview, refresh, onOpenGroup }) {
     setForm({
       name: group.name || "",
       guide_id: group.guide_id || "",
-      description: group.description || "",
+      description: group.description || ""
     });
     setError("");
     setModal({ type: "edit", group });
@@ -51,13 +51,13 @@ export default function GroupsPage({ overview, refresh, onOpenGroup }) {
       const payload = {
         name: form.name,
         guide_id: form.guide_id || null,
-        description: form.description || null,
+        description: form.description || null
       };
 
       if (modal.type === "create") {
         await api.createGroup({
           agency_id: AGENCY_ID,
-          ...payload,
+          ...payload
         });
       } else {
         await api.updateGroup(modal.group.id, payload);
@@ -73,13 +73,13 @@ export default function GroupsPage({ overview, refresh, onOpenGroup }) {
   }
 
   async function remove(group) {
-    if (!confirm(`Delete "${group.name}"?`)) return;
+    if (!confirm(t(`Delete "${group.name}"?`))) return;
 
     try {
       await api.deleteGroup(group.id);
       await refresh();
     } catch (e) {
-      alert(e.message);
+      alert(t(e.message));
     }
   }
 
@@ -88,13 +88,13 @@ export default function GroupsPage({ overview, refresh, onOpenGroup }) {
       <section className="panel">
         <div className="panel-heading">
           <div>
-            <span className="panel-kicker">AGENCY STRUCTURE</span>
-            <h2>Operational groups</h2>
+            <span className="panel-kicker">{t("AGENCY STRUCTURE")}</span>
+            <h2>{t("Operational groups")}</h2>
           </div>
 
           <button className="primary-btn" onClick={openCreate}>
-            <Plus size={16} />
-            Add group
+            <Plus size={16} />{t(" Add group ")}
+
           </button>
         </div>
 
@@ -102,16 +102,16 @@ export default function GroupsPage({ overview, refresh, onOpenGroup }) {
           <table className="data-table clickable-table">
             <thead>
               <tr>
-                <th>Group</th>
-                <th>Guide</th>
-                <th>Pilgrims</th>
-                <th>Status</th>
-                <th className="actions-column">Actions</th>
+                <th>{t("Group")}</th>
+                <th>{t("Guide")}</th>
+                <th>{t("Pilgrims")}</th>
+                <th>{t("Status")}</th>
+                <th className="actions-column">{t("Actions")}</th>
               </tr>
             </thead>
 
             <tbody>
-              {groups.map((group) => {
+              {t(groups.map((group) => {
                 const guide = guides.find((g) => g.id === group.guide_id);
                 const count = pilgrims.filter(
                   (p) => p.group_id === group.id
@@ -124,7 +124,7 @@ export default function GroupsPage({ overview, refresh, onOpenGroup }) {
                         <div className="entity-icon"><Users size={16} /></div>
                         <div>
                           <strong>{group.name}</strong>
-                          <span>{group.description || group.id}</span>
+                          <span>{t(group.description || group.id)}</span>
                         </div>
                       </div>
                     </td>
@@ -132,114 +132,114 @@ export default function GroupsPage({ overview, refresh, onOpenGroup }) {
                     <td onClick={() => onOpenGroup(group.id)}>
                       <span className="table-inline">
                         <ShieldCheck size={15} />
-                        {guide?.name || "Unassigned"}
+                        {t(guide?.name || "Unassigned")}
                       </span>
                     </td>
 
                     <td onClick={() => onOpenGroup(group.id)}>
-                      {count}
+                      {t(count)}
                     </td>
 
                     <td onClick={() => onOpenGroup(group.id)}>
                       <span className="status-live">
-                        <span />
-                        Operational
+                        <span />{t(" Operational ")}
+
                       </span>
                     </td>
 
                     <td className="row-actions">
                       <button
                         className="table-action"
-                        title="Open"
-                        onClick={() => onOpenGroup(group.id)}
-                      >
+                        title={t("Open")}
+                        onClick={() => onOpenGroup(group.id)}>
+
                         <Eye size={15} />
                       </button>
                       <button
                         className="table-action"
-                        title="Edit"
-                        onClick={() => openEdit(group)}
-                      >
+                        title={t("Edit")}
+                        onClick={() => openEdit(group)}>
+
                         <Pencil size={15} />
                       </button>
                       <button
                         className="table-action danger"
-                        title="Delete"
-                        onClick={() => remove(group)}
-                      >
+                        title={t("Delete")}
+                        onClick={() => remove(group)}>
+
                         <Trash2 size={15} />
                       </button>
                     </td>
-                  </tr>
-                );
-              })}
+                  </tr>);
+
+              }))}
             </tbody>
           </table>
         </div>
       </section>
 
-      {modal && (
-        <Modal
-          title={modal.type === "create" ? "Add group" : "Edit group"}
-          onClose={() => setModal(null)}
-        >
-          <form className="form-stack" onSubmit={save}>
-            {error && <div className="form-error">{error}</div>}
+      {t(modal &&
+      <Modal
+        title={t(modal.type === "create" ? "Add group" : "Edit group")}
+        onClose={() => setModal(null)}>
 
-            <label>
-              Group name
-              <input
-                required
-                value={form.name}
-                onChange={(e) =>
-                  setForm({ ...form, name: e.target.value })
-                }
-              />
+          <form className="form-stack" onSubmit={save}>
+            {t(error && <div className="form-error">{t(error)}</div>)}
+
+            <label>{t(" Group name ")}
+
+            <input
+              required
+              value={form.name}
+              onChange={(e) =>
+              setForm({ ...form, name: e.target.value })
+              } />
+
             </label>
 
-            <label>
-              Assigned guide
-              <select
-                value={form.guide_id}
-                onChange={(e) =>
-                  setForm({ ...form, guide_id: e.target.value })
-                }
-              >
-                <option value="">No guide</option>
-                {guides.map((guide) => (
-                  <option key={guide.id} value={guide.id}>
+            <label>{t(" Assigned guide ")}
+
+            <select
+              value={form.guide_id}
+              onChange={(e) =>
+              setForm({ ...form, guide_id: e.target.value })
+              }>
+
+                <option value="">{t("No guide")}</option>
+                {t(guides.map((guide) =>
+              <option key={guide.id} value={guide.id}>
                     {guide.name}
                   </option>
-                ))}
+              ))}
               </select>
             </label>
 
-            <label>
-              Description
-              <textarea
-                rows="4"
-                value={form.description}
-                onChange={(e) =>
-                  setForm({ ...form, description: e.target.value })
-                }
-              />
+            <label>{t(" Description ")}
+
+            <textarea
+              rows="4"
+              value={form.description}
+              onChange={(e) =>
+              setForm({ ...form, description: e.target.value })
+              } />
+
             </label>
 
             <div className="modal-actions">
               <button
-                type="button"
-                className="secondary-btn"
-                onClick={() => setModal(null)}
-              >
-                Cancel
-              </button>
+              type="button"
+              className="secondary-btn"
+              onClick={() => setModal(null)}>{t(" Cancel ")}
+
+
+            </button>
               <button className="primary-btn" disabled={busy}>
-                {busy ? "Saving..." : "Save group"}
+                {t(busy ? "Saving..." : "Save group")}
               </button>
             </div>
           </form>
-        </Modal>
-      )}
-    </div>
-  );
+        </Modal>)
+      }
+    </div>);
+
 }

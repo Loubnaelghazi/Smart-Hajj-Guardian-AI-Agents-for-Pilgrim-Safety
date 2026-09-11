@@ -1,18 +1,20 @@
-import {
+import { t } from "../i18n";import {
   Bell,
   ChevronDown,
   RefreshCw,
-  ShieldCheck,
-} from "lucide-react";
+  ShieldCheck } from
+"lucide-react";
 
+import { getLanguage, setLanguage } from '../i18n';
 const TITLES = {
+  tracking: ["Live Pilgrim Tracking", "Locate your pilgrims relative to the agency safe areas."],
   overview: ["Operations Overview", "Monitor pilgrim safety across your agency in real time."],
   groups: ["Groups", "Manage groups, guides and pilgrim membership."],
   "group-details": ["Group Details", "Manage pilgrims and the group's safe zone."],
   pilgrims: ["Pilgrims", "Review all registered pilgrims."],
   guides: ["Guides", "Manage operational guides and group assignments."],
   incidents: ["Incident Center", "Prioritize, acknowledge and resolve safety events."],
-  agency: ["Agency Settings", "Manage your agency profile and contact information."],
+  agency: ["Agency Settings", "Manage your agency profile and contact information."]
 };
 
 export default function Topbar({
@@ -21,45 +23,48 @@ export default function Topbar({
   refreshing,
   onRefresh,
   unreadCount = 0,
-  onToggleNotifications,
+  onToggleNotifications
 }) {
   const [title, subtitle] = TITLES[page] || TITLES.overview;
 
   return (
     <header className="topbar">
       <div className="topbar-copy">
-        <span className="topbar-kicker">SMART HAJJ GUARDIAN</span>
-        <h1>{title}</h1>
-        <p>{subtitle}</p>
+        <span className="topbar-kicker">{t("SMART HAJJ GUARDIAN")}</span>
+        <h1>{t(title)}</h1>
+        <p>{t(subtitle)}</p>
       </div>
 
       <div className="topbar-actions">
+        <button className="topbar-refresh-btn language-switch" type="button" lang={getLanguage() === 'ar' ? 'en' : 'ar'} onClick={() => setLanguage(getLanguage() === 'ar' ? 'en' : 'ar')}>
+          {getLanguage() === 'ar' ? 'English' : 'العربية'}
+        </button>
         <button
           className="topbar-icon-btn"
           type="button"
           onClick={onToggleNotifications}
-          title="Notifications"
-        >
+          title={t("Notifications")}>
+
           <Bell size={18} />
 
-          {unreadCount > 0 && (
-            <span className="notification-count">
-              {unreadCount > 99 ? "99+" : unreadCount}
-            </span>
-          )}
+          {t(unreadCount > 0 &&
+          <span className="notification-count">
+              {t(unreadCount > 99 ? "99+" : unreadCount)}
+            </span>)
+          }
         </button>
 
         <button
           className="topbar-refresh-btn"
           type="button"
           disabled={refreshing}
-          onClick={onRefresh}
-        >
+          onClick={onRefresh}>
+
           <RefreshCw
             size={17}
-            className={refreshing ? "spin" : ""}
-          />
-          {refreshing ? "Refreshing" : "Refresh"}
+            className={refreshing ? "spin" : ""} />
+
+          {t(refreshing ? "Refreshing" : "Refresh")}
         </button>
 
         <div className="agency-profile-card">
@@ -71,14 +76,14 @@ export default function Topbar({
 
           <div className="agency-profile-copy">
             <strong>
-              {agency?.name || "Smart Hajj Demo Agency"}
+              {t(agency?.name || "Smart Hajj Demo Agency")}
             </strong>
-            <span>{agency?.country || "Morocco"}</span>
+            <span>{t(agency?.country || "Morocco")}</span>
           </div>
 
           <ChevronDown size={16} className="agency-chevron" />
         </div>
       </div>
-    </header>
-  );
+    </header>);
+
 }

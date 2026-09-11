@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { t } from "./i18n";import { useEffect, useRef, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import NotificationCenter from "./components/NotificationCenter";
 import AlertToast from "./components/AlertToast";
 import OverviewPage from "./pages/OverviewPage";
+import TrackingPage from "./pages/TrackingPage";
 import GroupsPage from "./pages/GroupsPage";
 import GroupDetailsPage from "./pages/GroupDetailsPage";
 import PilgrimsPage from "./pages/PilgrimsPage";
@@ -13,8 +14,13 @@ import IncidentsPage from "./pages/IncidentsPage";
 import { api, AGENCY_ID } from "./services/api";
 
 const POLL_INTERVAL_MS = 5000;
+import { useSyncExternalStore } from 'react';
+import { getLanguage, setLanguage, subscribeLanguage } from './i18n';
+import './rtl.css';
 
 export default function App() {
+  const language = useSyncExternalStore(subscribeLanguage, getLanguage, getLanguage);
+  useEffect(() => { setLanguage(language); }, [language]);
   const [page, setPage] = useState("overview");
   const [selectedGroupId, setSelectedGroupId] = useState(null);
 
@@ -34,16 +40,16 @@ export default function App() {
   const knownIncidentIdsRef = useRef(new Set());
 
   async function load(full = false) {
-    if (full) setLoading(true);
-    else setRefreshing(true);
+    if (full) setLoading(true);else
+    setRefreshing(true);
 
     setError("");
 
     try {
       const [overviewData, healthData] = await Promise.all([
-        api.getAgencyOverview(AGENCY_ID),
-        api.health().catch(() => null),
-      ]);
+      api.getAgencyOverview(AGENCY_ID),
+      api.health().catch(() => null)]
+      );
 
       setOverview(overviewData);
       setHealth(healthData);
@@ -63,15 +69,15 @@ export default function App() {
 
       const sorted = [...incidents].sort((a, b) => {
         const aTime =
-          a.created_at ||
-          a.triggered_at ||
-          a.timestamp ||
-          "";
+        a.created_at ||
+        a.triggered_at ||
+        a.timestamp ||
+        "";
         const bTime =
-          b.created_at ||
-          b.triggered_at ||
-          b.timestamp ||
-          "";
+        b.created_at ||
+        b.triggered_at ||
+        b.timestamp ||
+        "";
         return String(bTime).localeCompare(String(aTime));
       });
 
@@ -91,14 +97,14 @@ export default function App() {
 
       const newIncidents = sorted.filter(
         (incident) =>
-          !knownIncidentIdsRef.current.has(incident.id)
+        !knownIncidentIdsRef.current.has(incident.id)
       );
 
       if (newIncidents.length > 0) {
         setUnreadIds((previous) => {
           const next = new Set(previous);
           newIncidents.forEach((incident) =>
-            next.add(incident.id)
+          next.add(incident.id)
           );
           return next;
         });
@@ -162,84 +168,87 @@ export default function App() {
 
   async function manualRefresh() {
     await Promise.all([
-      load(false),
-      pollIncidents(),
-    ]);
+    load(false),
+    pollIncidents()]
+    );
   }
 
   const incidentCount =
-    overview?.summary?.active_incidents ??
-    overview?.active_incidents_count ??
-    0;
+  overview?.summary?.active_incidents ??
+  overview?.active_incidents_count ??
+  0;
 
   let content = null;
 
-  if (page === "overview") {
-    content = (
-      <OverviewPage
-        overview={overview}
-        health={health}
-        refresh={manualRefresh}
-      />
-    );
+  if (page === "tracking") {
+    content = <TrackingPage onOpenGroup={openGroup} onOpenIncidents={() => navigate("incidents")} />;
+  } else if (page === "overview") {
+    content =
+    <OverviewPage
+      overview={overview}
+      health={health}
+      refresh={manualRefresh} />;
+
+
   } else if (page === "groups") {
-    content = (
-      <GroupsPage
-        overview={overview}
-        refresh={manualRefresh}
-        onOpenGroup={openGroup}
-      />
-    );
+    content =
+    <GroupsPage
+      overview={overview}
+      refresh={manualRefresh}
+      onOpenGroup={openGroup} />;
+
+
   } else if (
-    page === "group-details" &&
-    selectedGroupId
-  ) {
-    content = (
-      <GroupDetailsPage
-        groupId={selectedGroupId}
-        overview={overview}
-        refresh={manualRefresh}
-        onBack={() => navigate("groups")}
-      />
-    );
+  page === "group-details" &&
+  selectedGroupId)
+  {
+    content =
+    <GroupDetailsPage
+      groupId={selectedGroupId}
+      overview={overview}
+      refresh={manualRefresh}
+      onBack={() => navigate("groups")} />;
+
+
   } else if (page === "pilgrims") {
-    content = (
-      <PilgrimsPage
-        overview={overview}
-        refresh={manualRefresh}
-        onOpenGroup={openGroup}
-      />
-    );
+    content =
+    <PilgrimsPage
+      overview={overview}
+      refresh={manualRefresh}
+      onOpenGroup={openGroup} />;
+
+
   } else if (page === "guides") {
-    content = (
-      <GuidesPage
-        overview={overview}
-        refresh={manualRefresh}
-      />
-    );
+    content =
+    <GuidesPage
+      overview={overview}
+      refresh={manualRefresh} />;
+
+
   } else if (page === "agency") {
-    content = (
-      <AgencyPage
-        overview={overview}
-        refresh={manualRefresh}
-      />
-    );
+    content =
+    <AgencyPage
+      overview={overview}
+      refresh={manualRefresh} />;
+
+
   } else if (page === "incidents") {
-    content = (
-      <IncidentsPage
-        overview={overview}
-        refresh={manualRefresh}
-      />
-    );
+    content =
+    <IncidentsPage
+      overview={overview}
+      refresh={manualRefresh} />;
+
+
   }
 
   return (
     <div className="app-shell">
       <Sidebar
+        health={health}
         activePage={page}
         onNavigate={navigate}
-        incidentCount={incidentCount}
-      />
+        incidentCount={incidentCount} />
+
 
       <main className="main-content">
         <Topbar
@@ -249,27 +258,27 @@ export default function App() {
           onRefresh={manualRefresh}
           unreadCount={unreadIds.size}
           onToggleNotifications={() =>
-            setNotificationOpen((value) => !value)
-          }
-        />
+          setNotificationOpen((value) => !value)
+          } />
 
-        {error && (
-          <div className="error-banner">
-            <strong>Backend connection failed.</strong>
-            <span>{error}</span>
-          </div>
-        )}
 
-        {loading ? (
-          <div className="loading-screen">
+        {t(error &&
+        <div className="error-banner">
+            <strong>{t("Backend connection failed.")}</strong>
+            <span>{t(error)}</span>
+          </div>)
+        }
+
+        {t(loading ?
+        <div className="loading-screen">
             <div className="loader" />
-            <span>
-              Loading Guardian command center...
-            </span>
-          </div>
-        ) : (
-          content
-        )}
+            <span>{t(" Loading Guardian command center... ")}
+
+          </span>
+          </div> :
+
+        content)
+        }
       </main>
 
       <NotificationCenter
@@ -278,14 +287,14 @@ export default function App() {
         unreadIds={unreadIds}
         onClose={() => setNotificationOpen(false)}
         onMarkAllRead={markAllRead}
-        onOpenIncident={openIncidentCenter}
-      />
+        onOpenIncident={openIncidentCenter} />
+
 
       <AlertToast
         incident={toastIncident}
         onClose={() => setToastIncident(null)}
-        onOpen={() => openIncidentCenter(toastIncident)}
-      />
-    </div>
-  );
+        onOpen={() => openIncidentCenter(toastIncident)} />
+
+    </div>);
+
 }

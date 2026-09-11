@@ -1,48 +1,53 @@
-# Smart Hajj Guardian - Tier 1 Validation Prototype
+# Smart Hajj Guardian
 
-FastAPI backend + minimal HTML console for validating the first Nokia Network as Code integrations before building the agent layer and mobile/dashboard UI.
+Pilgrim assistance prototype with a FastAPI backend, LangGraph orchestration, Nokia network API integration and an English/Arabic React agency dashboard. The Flutter mobile application is maintained separately.
 
-## Tier 1 integrations
+## Features
 
-- Location Retrieval v0.2.0
-- Geofencing v0.3.0
-- Congestion Insights v1.0.0
-- Device Reachability Status Retrieve v1.1.0
+- Agency, group, guide, pilgrim and meeting-area management.
+- Live tracking with guide/group filters, GPS freshness and accuracy checks.
+- SOS incidents with acknowledgment and resolution.
+- English/Arabic dashboard with right-to-left layout.
+- Optional bilingual incident briefing; no LLM key is required for the fallback.
 
-## Setup
+## Run the backend and database
+
+Requirements: Docker Desktop with Docker Compose. On Windows, enable integration with Debian if running these commands in WSL.
+
+Run in this repository root:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate      # Windows: .venv\\Scripts\\activate
-pip install -r requirements.txt
 cp .env.example .env
+# Set NOKIA_API_KEY in .env for network API access.
+docker compose up --build -d
 ```
 
-Put your real Nokia/RapidAPI key in `.env`:
+API documentation: http://localhost:8000/docs
 
-```env
-NOKIA_API_KEY=your_key_here
-NOKIA_API_HOST=network-as-code.nokia.rapidapi.com
-NOKIA_BASE_URL=https://network-as-code.p-eu.apihub.nokia.io
-PUBLIC_BASE_URL=http://localhost:8000
-```
+Compose configures MongoDB automatically. Its bundled database credentials are for local development only. The root .env currently supplies NOKIA_API_KEY to Compose; other custom backend settings must also be passed through the backend environment configuration.
 
-Run from the project root:
+## Run the agency dashboard
+
+Use Node.js 22.12 or later.
 
 ```bash
-uvicorn backend.main:app --reload
+cd client
+npm ci
+npm run dev
 ```
 
-Open http://127.0.0.1:8000
+Open http://localhost:5173. The development server proxies API requests to localhost:8000. The default agency ID is demo-agency-001; it must exist in the database. Set VITE_AGENCY_ID in client/.env when using another agency. Set VITE_API_BASE_URL to the public backend URL for a hosted dashboard; configure backend CORS for that dashboard origin.
 
-Interactive API docs: http://127.0.0.1:8000/docs
+## Checks
 
-## Important webhook note
+```bash
+cd client
+npm run build
+node --test src/services/tracking.test.js
+```
 
-Nokia cannot call `localhost`. Geofencing and Congestion subscriptions need a publicly reachable HTTPS callback URL. During local validation, expose FastAPI using a tunnel and set `PUBLIC_BASE_URL` to that HTTPS URL.
+## Prototype scope
 
-The backend currently stores webhook events in memory at `GET /api/webhook-events` so the real Nokia payloads can be inspected before we model them permanently.
+Nokia API access requires appropriate credentials and a supported device or simulator. Network congestion is not crowd density. GPS sharing requires user permission. Risk and navigation decisions are rule-based; scores are not validated probabilities of harm. Incident status does not prove rescue.
 
-## Security
-
-Never commit `.env` or the real API key. `.gitignore` already excludes `.env`.
+Before public deployment, configure HTTPS, authenticated access, agency isolation, production credentials and persistent storage. Do not expose MongoDB or Mongo Express publicly. Never commit .env files or API keys.

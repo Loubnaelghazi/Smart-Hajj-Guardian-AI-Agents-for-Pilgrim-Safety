@@ -1,6 +1,8 @@
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
+from .mobile_observations import router as mobile_router, apply_device_distance
+from .briefing import router as briefing_router
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -42,6 +44,8 @@ app.add_middleware(
 )
 
 app.include_router(operations_router)
+app.include_router(mobile_router)
+app.include_router(briefing_router)
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -207,7 +211,7 @@ async def create_qod(body: QoDCreateRequest):
 async def guardian_analyze(body: GuardianAnalyzeRequest):
     return await guardian.analyze(
         phone_number=body.phone_number,
-        distance_from_group_m=body.distance_from_group_m,
+        distance_from_group_m=apply_device_distance(store, body.phone_number, body.distance_from_group_m),
         safe_area={
             "latitude": body.safe_area.latitude,
             "longitude": body.safe_area.longitude,
@@ -222,7 +226,7 @@ async def guardian_analyze(body: GuardianAnalyzeRequest):
 async def guardian_sos(body: SOSRequest):
     return await guardian.analyze(
         phone_number=body.phone_number,
-        distance_from_group_m=body.distance_from_group_m,
+        distance_from_group_m=apply_device_distance(store, body.phone_number, body.distance_from_group_m),
         safe_area={
             "latitude": body.safe_area.latitude,
             "longitude": body.safe_area.longitude,

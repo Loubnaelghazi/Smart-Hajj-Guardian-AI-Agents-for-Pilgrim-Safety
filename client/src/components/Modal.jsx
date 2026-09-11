@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { t } from "../i18n";import { X } from "lucide-react";
 
 export default function Modal({ title, children, onClose, width = 560 }) {
   return (
@@ -6,16 +6,16 @@ export default function Modal({ title, children, onClose, width = 560 }) {
       <section
         className="modal-card"
         style={{ maxWidth: width }}
-        onMouseDown={(event) => event.stopPropagation()}
-      >
+        onMouseDown={(event) => event.stopPropagation()}>
+
         <div className="modal-head">
-          <h2>{title}</h2>
+          <h2>{t(title)}</h2>
           <button type="button" className="icon-plain" onClick={onClose}>
             <X size={18} />
           </button>
         </div>
-        <div className="modal-body">{children}</div>
+        <div className="modal-body">{t(children)}</div>
       </section>
-    </div>
-  );
+    </div>);
+
 }

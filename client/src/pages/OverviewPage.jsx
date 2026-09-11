@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { t } from "../i18n";import { useState } from "react";
 import {
   AlertTriangle,
   ShieldAlert,
   UserRound,
   Users,
   RadioTower,
-  ArrowUpRight,
-} from "lucide-react";
+  ArrowUpRight } from
+"lucide-react";
 import StatCard from "../components/StatCard";
 import IncidentCard from "../components/IncidentCard";
 import { api } from "../services/api";
@@ -36,19 +36,19 @@ export default function OverviewPage({ overview, health, refresh }) {
     <div className="page-stack">
       <section className="overview-hero">
         <div className="overview-hero-content">
-          <span className="hero-label">AGENCY SAFETY OPERATIONS</span>
-          <h2>
-            One command center for
-            <span> safer pilgrim journeys.</span>
+          <span className="hero-label">{t("AGENCY SAFETY OPERATIONS")}</span>
+          <h2>{t(" One command center for ")}
+
+            <span>{t(" safer pilgrim journeys.")}</span>
           </h2>
-          <p>
-            Guardian combines telecom intelligence, risk scoring and operational
-            workflows so your teams can act before situations escalate.
+          <p>{t(" Guardian combines telecom intelligence, risk scoring and operational workflows so your teams can act before situations escalate. ")}
+
+
           </p>
 
           <div className="hero-badges">
-            <span><span className="live-dot" /> Guardian live</span>
-            <span><RadioTower size={13} /> CAMARA network signals</span>
+            <span>{t(health?.status === 'ok' ? 'Guardian backend reachable' : 'Backend status unavailable')}</span>
+            <span><RadioTower size={13} />{t(" CAMARA network signals")}</span>
           </div>
         </div>
 
@@ -57,12 +57,12 @@ export default function OverviewPage({ overview, health, refresh }) {
             <ShieldAlert size={24} />
           </div>
           <div>
-            <span>System status</span>
+            <span>{t("System status")}</span>
             <strong>
-              {health?.mongodb ? "All systems operational" : "Monitoring active"}
+              {t(health?.status === 'ok' && health?.mongodb ? "Backend and database available" : "Check backend connection")}
             </strong>
-            <small>
-              MongoDB {health?.mongodb ? "connected" : "status unavailable"}
+            <small>{t(" MongoDB ")}
+              {t(health?.mongodb ? "connected" : "status unavailable")}
             </small>
           </div>
         </div>
@@ -70,102 +70,102 @@ export default function OverviewPage({ overview, health, refresh }) {
 
       <section className="metrics-grid">
         <StatCard
-          title="Groups"
+          title={t("Groups")}
           value={summary.groups ?? overview?.groups_count}
-          subtitle="Operational groups"
+          subtitle={t("Operational groups")}
           icon={Users}
-          tone="blue"
-        />
+          tone="blue" />
+
         <StatCard
-          title="Pilgrims"
+          title={t("Pilgrims")}
           value={summary.pilgrims ?? overview?.pilgrims_count}
-          subtitle="Registered pilgrims"
+          subtitle={t("Registered pilgrims")}
           icon={UserRound}
-          tone="emerald"
-        />
+          tone="emerald" />
+
         <StatCard
-          title="Active incidents"
+          title={t("Active incidents")}
           value={summary.active_incidents ?? overview?.active_incidents_count}
-          subtitle="Cases needing attention"
+          subtitle={t("Cases needing attention")}
           icon={AlertTriangle}
-          tone="amber"
-        />
+          tone="amber" />
+
         <StatCard
-          title="Critical incidents"
+          title={t("Critical incidents")}
           value={summary.critical_incidents ?? overview?.critical_incidents_count}
-          subtitle="Highest priority"
+          subtitle={t("Highest priority")}
           icon={ShieldAlert}
-          tone="red"
-        />
+          tone="red" />
+
       </section>
 
       <section className="dashboard-grid">
         <div className="panel panel-large">
           <div className="panel-heading">
             <div>
-              <span className="panel-kicker">LIVE OPERATIONS</span>
-              <h2>Active incidents</h2>
+              <span className="panel-kicker">{t("LIVE OPERATIONS")}</span>
+              <h2>{t("Active incidents")}</h2>
             </div>
-            <button className="link-button" type="button">
-              View all <ArrowUpRight size={14} />
+            <button className="link-button" type="button">{t(" View all ")}
+              <ArrowUpRight size={14} />
             </button>
           </div>
 
-          {incidents.length === 0 ? (
-            <div className="empty-state">
+          {t(incidents.length === 0 ?
+          <div className="empty-state">
               <div className="empty-state-icon">
                 <ShieldAlert size={26} />
               </div>
-              <h3>No active incidents</h3>
-              <p>Your agency is currently operating without active safety alerts.</p>
-            </div>
-          ) : (
-            <div className="incident-list">
-              {incidents.slice(0, 4).map((incident) => (
-                <IncidentCard
-                  key={incident.id}
-                  incident={incident}
-                  busy={busy === incident.id}
-                  onAcknowledge={(id) => act("ack", id)}
-                  onResolve={(id) => act("resolve", id)}
-                />
-              ))}
-            </div>
-          )}
+              <h3>{t("No active incidents")}</h3>
+              <p>{t("Your agency is currently operating without active safety alerts.")}</p>
+            </div> :
+
+          <div className="incident-list">
+              {t(incidents.slice(0, 4).map((incident) =>
+            <IncidentCard
+              key={incident.id}
+              incident={incident}
+              busy={busy === incident.id}
+              onAcknowledge={(id) => act("ack", id)}
+              onResolve={(id) => act("resolve", id)} />
+
+            ))}
+            </div>)
+          }
         </div>
 
         <div className="panel">
           <div className="panel-heading">
             <div>
-              <span className="panel-kicker">GROUP COVERAGE</span>
-              <h2>Operational groups</h2>
+              <span className="panel-kicker">{t("GROUP COVERAGE")}</span>
+              <h2>{t("Operational groups")}</h2>
             </div>
-            <span className="count-chip">{groups.length}</span>
+            <span className="count-chip">{t(groups.length)}</span>
           </div>
 
           <div className="groups-mini-list">
-            {groups.length === 0 ? (
-              <div className="empty-small">No groups configured yet.</div>
-            ) : (
-              groups.map((group, index) => (
-                <div className="group-mini-row" key={group.id}>
+            {t(groups.length === 0 ?
+            <div className="empty-small">{t("No groups configured yet.")}</div> :
+
+            groups.map((group, index) =>
+            <div className="group-mini-row" key={group.id}>
                   <div className="group-mini-index">
-                    {String(index + 1).padStart(2, "0")}
+                    {t(String(index + 1).padStart(2, "0"))}
                   </div>
                   <div className="group-mini-copy">
                     <strong>{group.name}</strong>
-                    <span>{group.description || "Guardian protected group"}</span>
+                    <span>{t(group.description || "Guardian protected group")}</span>
                   </div>
                   <span className="status-live">
-                    <span />
-                    Active
-                  </span>
+                    <span />{t(" Active ")}
+
+              </span>
                 </div>
-              ))
-            )}
+            ))
+            }
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>);
+
 }

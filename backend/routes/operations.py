@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from ..domain_models import (
     Agency,
@@ -76,6 +76,10 @@ class CreatePilgrimRequest(BaseModel):
     name: str
     phone_number: str
     nationality: str | None = None
+
+
+class LookupPilgrimRequest(BaseModel):
+    phone_number: str = Field(min_length=1, max_length=64)
 
 
 class UpdatePilgrimRequest(BaseModel):
@@ -401,6 +405,18 @@ async def get_pilgrim(pilgrim_id: str):
     pilgrim = PilgrimRepository.get(pilgrim_id)
     if not pilgrim:
         raise HTTPException(404, "Pilgrim not found.")
+    return pilgrim
+
+
+@router.post("/pilgrims/lookup", response_model=Pilgrim)
+async def lookup_pilgrim(request: LookupPilgrimRequest):
+    """Demo identification only; this does not verify phone ownership."""
+    phone = request.phone_number.strip()
+    if not phone:
+        raise HTTPException(422, "Phone number is required.")
+    pilgrim = PilgrimRepository.get_by_phone(phone)
+    if not pilgrim:
+        raise HTTPException(404, "No pilgrim is registered with this phone number.")
     return pilgrim
 
 

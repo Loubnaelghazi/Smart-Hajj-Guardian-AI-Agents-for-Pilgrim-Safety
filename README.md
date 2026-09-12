@@ -51,3 +51,18 @@ node --test src/services/tracking.test.js
 Nokia API access requires appropriate credentials and a supported device or simulator. Network congestion is not crowd density. GPS sharing requires user permission. Risk and navigation decisions are rule-based; scores are not validated probabilities of harm. Incident status does not prove rescue.
 
 Before public deployment, configure HTTPS, authenticated access, agency isolation, production credentials and persistent storage. Do not expose MongoDB or Mongo Express publicly. Never commit .env files or API keys.
+
+
+## Flutter mobile application
+
+The Android/iOS Flutter source is in [`smart_hajj_mobile`](smart_hajj_mobile/README.md), alongside `backend` (FastAPI) and `client` (React dashboard).
+
+With Flutter and an Android emulator or USB debugging device installed:
+
+```sh
+cd smart_hajj_mobile
+flutter pub get
+flutter run --dart-define=API_BASE_URL=https://smart-hajj-guardian-ai-agents-for.onrender.com
+```
+
+Use a pilgrim phone registered in the hosted dashboard. The mobile app calls the hosted backend; do not put MongoDB or Nokia credentials in Flutter. See the mobile README for local Docker alternatives and demo limitations.

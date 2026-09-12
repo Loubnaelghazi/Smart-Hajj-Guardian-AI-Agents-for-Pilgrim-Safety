@@ -8,3 +8,6 @@
 **/*.pyc
 .venv
 **/*:Zone.Identifier
+
+# Mobile sources are not needed to build the backend image
+smart_hajj_mobile/

@@ -1,0 +1,1076 @@
+﻿{
+    "phone_number":  "+99999991000",
+    "risk":  {
+                 "score":  55,
+                 "level":  "HIGH",
+                 "reasons":  [
+                                 "Nokia Location Verification reports the pilgrim outside the configured safe area.",
+                                 "Pilgrim is 450 m from their group.",
+                                 "Device is reachable.",
+                                 "Network congestion is Low."
+                             ],
+                 "recommended_actions":  [
+                                             "Alert the pilgrim and assigned guide.",
+                                             "Guide pilgrim toward their group.",
+                                             "Avoid high-congestion areas."
+                                         ],
+                 "evidence":  [
+                                  "outside_safe_zone",
+                                  "group_separation",
+                                  "device_reachable",
+                                  "low_congestion"
+                              ]
+             },
+    "confidence":  {
+                       "score":  100,
+                       "level":  "HIGH",
+                       "signals_available":  3,
+                       "signals_expected":  3,
+                       "missing_signals":  [
+
+                                           ],
+                       "stale_signals":  [
+
+                                         ],
+                       "evidence":  [
+                                        "location_verification_available",
+                                        "reachability_available",
+                                        "congestion_available"
+                                    ]
+                   },
+    "navigation":  {
+                       "primary_action":  "RETURN_TO_GROUP",
+                       "guidance":  "Return toward the assigned group or designated safe checkpoint.",
+                       "distance_from_group_m":  450.0,
+                       "congestion_level":  "LOW",
+                       "actions":  [
+                                       "Move toward group.",
+                                       "Notify guide of separation."
+                                   ]
+                   },
+    "emergency":  {
+                      "triggered":  false
+                  },
+    "incident":  null,
+    "memory":  {
+                   "event_count":  7,
+                   "recent_risk_levels":  [
+                                              "HIGH",
+                                              "CRITICAL",
+                                              "CRITICAL",
+                                              "CRITICAL"
+                                          ],
+                   "recent_events":  [
+                                         {
+                                             "timestamp":  "2026-09-06T16:54:30.861044+00:00",
+                                             "type":  "risk-analysis",
+                                             "payload":  {
+                                                             "risk":  {
+                                                                          "score":  55,
+                                                                          "level":  "HIGH",
+                                                                          "reasons":  [
+                                                                                          "Nokia Location Verification reports the pilgrim outside the configured safe area.",
+                                                                                          "Pilgrim is 450 m from their group.",
+                                                                                          "Device is reachable.",
+                                                                                          "Network congestion is Low."
+                                                                                      ],
+                                                                          "recommended_actions":  [
+                                                                                                      "Alert the pilgrim and assigned guide.",
+                                                                                                      "Guide pilgrim toward their group.",
+                                                                                                      "Avoid high-congestion areas."
+                                                                                                  ],
+                                                                          "evidence":  [
+                                                                                           "outside_safe_zone",
+                                                                                           "group_separation",
+                                                                                           "device_reachable",
+                                                                                           "low_congestion"
+                                                                                       ]
+                                                                      },
+                                                             "confidence":  {
+                                                                                "score":  100,
+                                                                                "level":  "HIGH",
+                                                                                "signals_available":  3,
+                                                                                "signals_expected":  3,
+                                                                                "missing_signals":  [
+
+                                                                                                    ],
+                                                                                "stale_signals":  [
+
+                                                                                                  ],
+                                                                                "evidence":  [
+                                                                                                 "location_verification_available",
+                                                                                                 "reachability_available",
+                                                                                                 "congestion_available"
+                                                                                             ]
+                                                                            },
+                                                             "navigation":  {
+                                                                                "primary_action":  "RETURN_TO_GROUP",
+                                                                                "guidance":  "Return toward the assigned group or designated safe checkpoint.",
+                                                                                "distance_from_group_m":  450.0,
+                                                                                "congestion_level":  "LOW",
+                                                                                "actions":  [
+                                                                                                "Move toward group.",
+                                                                                                "Notify guide of separation."
+                                                                                            ]
+                                                                            },
+                                                             "emergency":  {
+                                                                               "triggered":  false
+                                                                           },
+                                                             "incident":  null,
+                                                             "telecom_errors":  [
+
+                                                                                ]
+                                                         }
+                                         },
+                                         {
+                                             "timestamp":  "2026-09-06T16:46:10.120736+00:00",
+                                             "type":  "sos",
+                                             "payload":  {
+                                                             "risk":  {
+                                                                          "score":  100,
+                                                                          "level":  "CRITICAL",
+                                                                          "reasons":  [
+                                                                                          "Pilgrim manually triggered SOS."
+                                                                                      ],
+                                                                          "recommended_actions":  [
+                                                                                                      "Escalate immediately to guide and command center.",
+                                                                                                      "Check current network reachability.",
+                                                                                                      "Request emergency Quality-on-Demand."
+                                                                                                  ],
+                                                                          "evidence":  [
+                                                                                           "manual_sos"
+                                                                                       ]
+                                                                      },
+                                                             "confidence":  {
+                                                                                "score":  80,
+                                                                                "level":  "HIGH",
+                                                                                "signals_available":  2,
+                                                                                "signals_expected":  3,
+                                                                                "missing_signals":  [
+                                                                                                        "congestion"
+                                                                                                    ],
+                                                                                "stale_signals":  [
+
+                                                                                                  ],
+                                                                                "evidence":  [
+                                                                                                 "location_verification_available",
+                                                                                                 "reachability_available"
+                                                                                             ]
+                                                                            },
+                                                             "navigation":  {
+                                                                                "primary_action":  "WAIT_FOR_GUIDE",
+                                                                                "guidance":  "Do not move into unfamiliar or high-risk areas. Stay in a safe position and wait for guide support.",
+                                                                                "distance_from_group_m":  null,
+                                                                                "congestion_level":  null,
+                                                                                "actions":  [
+                                                                                                "Notify assigned guide.",
+                                                                                                "Keep communication channel active."
+                                                                                            ]
+                                                                            },
+                                                             "emergency":  {
+                                                                               "triggered":  true,
+                                                                               "triggered_at":  "2026-09-06T16:46:09.796724+00:00",
+                                                                               "qod_requested":  true,
+                                                                               "qod":  {
+                                                                                           "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                                                                           "device":  {
+                                                                                                          "phoneNumber":  "+99999991000",
+                                                                                                          "ipv4Address":  {
+                                                                                                                              "publicAddress":  "233.252.0.2",
+                                                                                                                              "privateAddress":  "192.0.2.25",
+                                                                                                                              "publicPort":  80
+                                                                                                                          }
+                                                                                                      },
+                                                                                           "applicationServer":  {
+                                                                                                                     "ipv4Address":  "8.8.8.8"
+                                                                                                                 },
+                                                                                           "sessionId":  "f6567d39-061d-4eb8-a393-306a82b2ba3f",
+                                                                                           "qosStatus":  "REQUESTED",
+                                                                                           "duration":  60
+                                                                                       },
+                                                                               "errors":  [
+
+                                                                                          ]
+                                                                           },
+                                                             "incident":  {
+                                                                              "id":  "60715a25-3d07-488a-8f6a-be371f29b2da",
+                                                                              "type":  "SOS",
+                                                                              "status":  "OPEN",
+                                                                              "agency_id":  "demo-agency-001",
+                                                                              "group_id":  "demo-group-001",
+                                                                              "pilgrim_id":  "demo-pilgrim-001",
+                                                                              "guide_id":  "demo-guide-001",
+                                                                              "risk_score":  100,
+                                                                              "risk_level":  "CRITICAL",
+                                                                              "confidence_score":  80,
+                                                                              "confidence_level":  "HIGH",
+                                                                              "navigation_action":  "WAIT_FOR_GUIDE",
+                                                                              "evidence":  [
+                                                                                               "manual_sos"
+                                                                                           ],
+                                                                              "created_at":  "2026-09-06T16:35:45.700617Z",
+                                                                              "acknowledged_at":  null,
+                                                                              "resolved_at":  null
+                                                                          },
+                                                             "telecom_errors":  [
+
+                                                                                ]
+                                                         }
+                                         },
+                                         {
+                                             "timestamp":  "2026-09-06T16:46:10.120724+00:00",
+                                             "type":  "risk-analysis",
+                                             "payload":  {
+                                                             "risk":  {
+                                                                          "score":  100,
+                                                                          "level":  "CRITICAL",
+                                                                          "reasons":  [
+                                                                                          "Pilgrim manually triggered SOS."
+                                                                                      ],
+                                                                          "recommended_actions":  [
+                                                                                                      "Escalate immediately to guide and command center.",
+                                                                                                      "Check current network reachability.",
+                                                                                                      "Request emergency Quality-on-Demand."
+                                                                                                  ],
+                                                                          "evidence":  [
+                                                                                           "manual_sos"
+                                                                                       ]
+                                                                      },
+                                                             "confidence":  {
+                                                                                "score":  80,
+                                                                                "level":  "HIGH",
+                                                                                "signals_available":  2,
+                                                                                "signals_expected":  3,
+                                                                                "missing_signals":  [
+                                                                                                        "congestion"
+                                                                                                    ],
+                                                                                "stale_signals":  [
+
+                                                                                                  ],
+                                                                                "evidence":  [
+                                                                                                 "location_verification_available",
+                                                                                                 "reachability_available"
+                                                                                             ]
+                                                                            },
+                                                             "navigation":  {
+                                                                                "primary_action":  "WAIT_FOR_GUIDE",
+                                                                                "guidance":  "Do not move into unfamiliar or high-risk areas. Stay in a safe position and wait for guide support.",
+                                                                                "distance_from_group_m":  null,
+                                                                                "congestion_level":  null,
+                                                                                "actions":  [
+                                                                                                "Notify assigned guide.",
+                                                                                                "Keep communication channel active."
+                                                                                            ]
+                                                                            },
+                                                             "emergency":  {
+                                                                               "triggered":  true,
+                                                                               "triggered_at":  "2026-09-06T16:46:09.796724+00:00",
+                                                                               "qod_requested":  true,
+                                                                               "qod":  {
+                                                                                           "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                                                                           "device":  {
+                                                                                                          "phoneNumber":  "+99999991000",
+                                                                                                          "ipv4Address":  {
+                                                                                                                              "publicAddress":  "233.252.0.2",
+                                                                                                                              "privateAddress":  "192.0.2.25",
+                                                                                                                              "publicPort":  80
+                                                                                                                          }
+                                                                                                      },
+                                                                                           "applicationServer":  {
+                                                                                                                     "ipv4Address":  "8.8.8.8"
+                                                                                                                 },
+                                                                                           "sessionId":  "f6567d39-061d-4eb8-a393-306a82b2ba3f",
+                                                                                           "qosStatus":  "REQUESTED",
+                                                                                           "duration":  60
+                                                                                       },
+                                                                               "errors":  [
+
+                                                                                          ]
+                                                                           },
+                                                             "incident":  {
+                                                                              "id":  "60715a25-3d07-488a-8f6a-be371f29b2da",
+                                                                              "type":  "SOS",
+                                                                              "status":  "OPEN",
+                                                                              "agency_id":  "demo-agency-001",
+                                                                              "group_id":  "demo-group-001",
+                                                                              "pilgrim_id":  "demo-pilgrim-001",
+                                                                              "guide_id":  "demo-guide-001",
+                                                                              "risk_score":  100,
+                                                                              "risk_level":  "CRITICAL",
+                                                                              "confidence_score":  80,
+                                                                              "confidence_level":  "HIGH",
+                                                                              "navigation_action":  "WAIT_FOR_GUIDE",
+                                                                              "evidence":  [
+                                                                                               "manual_sos"
+                                                                                           ],
+                                                                              "created_at":  "2026-09-06T16:35:45.700617Z",
+                                                                              "acknowledged_at":  null,
+                                                                              "resolved_at":  null
+                                                                          },
+                                                             "telecom_errors":  [
+
+                                                                                ]
+                                                         }
+                                         },
+                                         {
+                                             "timestamp":  "2026-09-06T16:37:55.512131+00:00",
+                                             "type":  "sos",
+                                             "payload":  {
+                                                             "risk":  {
+                                                                          "score":  100,
+                                                                          "level":  "CRITICAL",
+                                                                          "reasons":  [
+                                                                                          "Pilgrim manually triggered SOS."
+                                                                                      ],
+                                                                          "recommended_actions":  [
+                                                                                                      "Escalate immediately to guide and command center.",
+                                                                                                      "Check current network reachability.",
+                                                                                                      "Request emergency Quality-on-Demand."
+                                                                                                  ],
+                                                                          "evidence":  [
+                                                                                           "manual_sos"
+                                                                                       ]
+                                                                      },
+                                                             "confidence":  {
+                                                                                "score":  80,
+                                                                                "level":  "HIGH",
+                                                                                "signals_available":  2,
+                                                                                "signals_expected":  3,
+                                                                                "missing_signals":  [
+                                                                                                        "congestion"
+                                                                                                    ],
+                                                                                "stale_signals":  [
+
+                                                                                                  ],
+                                                                                "evidence":  [
+                                                                                                 "location_verification_available",
+                                                                                                 "reachability_available"
+                                                                                             ]
+                                                                            },
+                                                             "navigation":  {
+                                                                                "primary_action":  "WAIT_FOR_GUIDE",
+                                                                                "guidance":  "Do not move into unfamiliar or high-risk areas. Stay in a safe position and wait for guide support.",
+                                                                                "distance_from_group_m":  null,
+                                                                                "congestion_level":  null,
+                                                                                "actions":  [
+                                                                                                "Notify assigned guide.",
+                                                                                                "Keep communication channel active."
+                                                                                            ]
+                                                                            },
+                                                             "emergency":  {
+                                                                               "triggered":  true,
+                                                                               "triggered_at":  "2026-09-06T16:37:55.162478+00:00",
+                                                                               "qod_requested":  true,
+                                                                               "qod":  {
+                                                                                           "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                                                                           "device":  {
+                                                                                                          "phoneNumber":  "+99999991000",
+                                                                                                          "ipv4Address":  {
+                                                                                                                              "publicAddress":  "233.252.0.2",
+                                                                                                                              "privateAddress":  "192.0.2.25",
+                                                                                                                              "publicPort":  80
+                                                                                                                          }
+                                                                                                      },
+                                                                                           "applicationServer":  {
+                                                                                                                     "ipv4Address":  "8.8.8.8"
+                                                                                                                 },
+                                                                                           "sessionId":  "16e45b89-5b6a-41c1-8b96-d7fa05f98d4f",
+                                                                                           "qosStatus":  "REQUESTED",
+                                                                                           "duration":  60
+                                                                                       },
+                                                                               "errors":  [
+
+                                                                                          ]
+                                                                           },
+                                                             "incident":  {
+                                                                              "id":  "60715a25-3d07-488a-8f6a-be371f29b2da",
+                                                                              "type":  "SOS",
+                                                                              "status":  "OPEN",
+                                                                              "agency_id":  "demo-agency-001",
+                                                                              "group_id":  "demo-group-001",
+                                                                              "pilgrim_id":  "demo-pilgrim-001",
+                                                                              "guide_id":  "demo-guide-001",
+                                                                              "risk_score":  100,
+                                                                              "risk_level":  "CRITICAL",
+                                                                              "confidence_score":  80,
+                                                                              "confidence_level":  "HIGH",
+                                                                              "navigation_action":  "WAIT_FOR_GUIDE",
+                                                                              "evidence":  [
+                                                                                               "manual_sos"
+                                                                                           ],
+                                                                              "created_at":  "2026-09-06T16:35:45.700617Z",
+                                                                              "acknowledged_at":  null,
+                                                                              "resolved_at":  null
+                                                                          },
+                                                             "telecom_errors":  [
+
+                                                                                ]
+                                                         }
+                                         },
+                                         {
+                                             "timestamp":  "2026-09-06T16:37:55.512116+00:00",
+                                             "type":  "risk-analysis",
+                                             "payload":  {
+                                                             "risk":  {
+                                                                          "score":  100,
+                                                                          "level":  "CRITICAL",
+                                                                          "reasons":  [
+                                                                                          "Pilgrim manually triggered SOS."
+                                                                                      ],
+                                                                          "recommended_actions":  [
+                                                                                                      "Escalate immediately to guide and command center.",
+                                                                                                      "Check current network reachability.",
+                                                                                                      "Request emergency Quality-on-Demand."
+                                                                                                  ],
+                                                                          "evidence":  [
+                                                                                           "manual_sos"
+                                                                                       ]
+                                                                      },
+                                                             "confidence":  {
+                                                                                "score":  80,
+                                                                                "level":  "HIGH",
+                                                                                "signals_available":  2,
+                                                                                "signals_expected":  3,
+                                                                                "missing_signals":  [
+                                                                                                        "congestion"
+                                                                                                    ],
+                                                                                "stale_signals":  [
+
+                                                                                                  ],
+                                                                                "evidence":  [
+                                                                                                 "location_verification_available",
+                                                                                                 "reachability_available"
+                                                                                             ]
+                                                                            },
+                                                             "navigation":  {
+                                                                                "primary_action":  "WAIT_FOR_GUIDE",
+                                                                                "guidance":  "Do not move into unfamiliar or high-risk areas. Stay in a safe position and wait for guide support.",
+                                                                                "distance_from_group_m":  null,
+                                                                                "congestion_level":  null,
+                                                                                "actions":  [
+                                                                                                "Notify assigned guide.",
+                                                                                                "Keep communication channel active."
+                                                                                            ]
+                                                                            },
+                                                             "emergency":  {
+                                                                               "triggered":  true,
+                                                                               "triggered_at":  "2026-09-06T16:37:55.162478+00:00",
+                                                                               "qod_requested":  true,
+                                                                               "qod":  {
+                                                                                           "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                                                                           "device":  {
+                                                                                                          "phoneNumber":  "+99999991000",
+                                                                                                          "ipv4Address":  {
+                                                                                                                              "publicAddress":  "233.252.0.2",
+                                                                                                                              "privateAddress":  "192.0.2.25",
+                                                                                                                              "publicPort":  80
+                                                                                                                          }
+                                                                                                      },
+                                                                                           "applicationServer":  {
+                                                                                                                     "ipv4Address":  "8.8.8.8"
+                                                                                                                 },
+                                                                                           "sessionId":  "16e45b89-5b6a-41c1-8b96-d7fa05f98d4f",
+                                                                                           "qosStatus":  "REQUESTED",
+                                                                                           "duration":  60
+                                                                                       },
+                                                                               "errors":  [
+
+                                                                                          ]
+                                                                           },
+                                                             "incident":  {
+                                                                              "id":  "60715a25-3d07-488a-8f6a-be371f29b2da",
+                                                                              "type":  "SOS",
+                                                                              "status":  "OPEN",
+                                                                              "agency_id":  "demo-agency-001",
+                                                                              "group_id":  "demo-group-001",
+                                                                              "pilgrim_id":  "demo-pilgrim-001",
+                                                                              "guide_id":  "demo-guide-001",
+                                                                              "risk_score":  100,
+                                                                              "risk_level":  "CRITICAL",
+                                                                              "confidence_score":  80,
+                                                                              "confidence_level":  "HIGH",
+                                                                              "navigation_action":  "WAIT_FOR_GUIDE",
+                                                                              "evidence":  [
+                                                                                               "manual_sos"
+                                                                                           ],
+                                                                              "created_at":  "2026-09-06T16:35:45.700617Z",
+                                                                              "acknowledged_at":  null,
+                                                                              "resolved_at":  null
+                                                                          },
+                                                             "telecom_errors":  [
+
+                                                                                ]
+                                                         }
+                                         }
+                                     ]
+               },
+    "telecom_errors":  [
+
+                       ],
+    "telecom_sources":  {
+                            "location_verification":  {
+                                                          "source":  "live-nokia"
+                                                      },
+                            "reachability":  {
+                                                 "source":  "live-nokia"
+                                             },
+                            "congestion":  {
+                                               "source":  "live-nokia",
+                                               "simulator_device":  "+36719991000"
+                                           }
+                        },
+    "pilgrim_state":  {
+                          "phone_number":  "+99999991000",
+                          "updated_at":  "2026-09-06T16:54:30.861076+00:00",
+                          "geofence_state":  "outside",
+                          "location_verification":  {
+                                                        "verificationResult":  "FALSE",
+                                                        "lastLocationTime":  "2026-09-06T16:54:31.148107"
+                                                    },
+                          "location":  null,
+                          "distance_from_group_m":  450.0,
+                          "reachability":  {
+                                               "device":  {
+                                                              "phoneNumber":  "+99999991000"
+                                                          },
+                                               "reachable":  true,
+                                               "connectivity":  [
+                                                                    "SMS"
+                                                                ],
+                                               "lastStatusTime":  "2026-09-06T16:54:31.423683Z"
+                                           },
+                          "congestion":  {
+                                             "source_device":  "+36719991000",
+                                             "data":  [
+                                                          {
+                                                              "timeIntervalStart":  "2026-09-06T16:49:31.779704Z",
+                                                              "timeIntervalStop":  "2026-09-06T16:54:31.779704Z",
+                                                              "congestionLevel":  "Low"
+                                                          },
+                                                          {
+                                                              "timeIntervalStart":  "2026-09-06T16:44:31.779704Z",
+                                                              "timeIntervalStop":  "2026-09-06T16:49:31.779704Z",
+                                                              "congestionLevel":  "Medium"
+                                                          },
+                                                          {
+                                                              "timeIntervalStart":  "2026-09-06T16:39:31.779704Z",
+                                                              "timeIntervalStop":  "2026-09-06T16:44:31.779704Z",
+                                                              "congestionLevel":  "Low"
+                                                          }
+                                                      ]
+                                         },
+                          "risk":  {
+                                       "score":  55,
+                                       "level":  "HIGH",
+                                       "reasons":  [
+                                                       "Nokia Location Verification reports the pilgrim outside the configured safe area.",
+                                                       "Pilgrim is 450 m from their group.",
+                                                       "Device is reachable.",
+                                                       "Network congestion is Low."
+                                                   ],
+                                       "recommended_actions":  [
+                                                                   "Alert the pilgrim and assigned guide.",
+                                                                   "Guide pilgrim toward their group.",
+                                                                   "Avoid high-congestion areas."
+                                                               ],
+                                       "evidence":  [
+                                                        "outside_safe_zone",
+                                                        "group_separation",
+                                                        "device_reachable",
+                                                        "low_congestion"
+                                                    ]
+                                   },
+                          "last_sos":  "2026-09-06T16:46:09.796724+00:00",
+                          "navigation":  {
+                                             "primary_action":  "RETURN_TO_GROUP",
+                                             "guidance":  "Return toward the assigned group or designated safe checkpoint.",
+                                             "distance_from_group_m":  450.0,
+                                             "congestion_level":  "LOW",
+                                             "actions":  [
+                                                             "Move toward group.",
+                                                             "Notify guide of separation."
+                                                         ]
+                                         },
+                          "memory_summary":  {
+                                                 "event_count":  7,
+                                                 "recent_risk_levels":  [
+                                                                            "HIGH",
+                                                                            "CRITICAL",
+                                                                            "CRITICAL",
+                                                                            "CRITICAL"
+                                                                        ],
+                                                 "recent_events":  [
+                                                                       {
+                                                                           "timestamp":  "2026-09-06T16:54:30.861044+00:00",
+                                                                           "type":  "risk-analysis",
+                                                                           "payload":  {
+                                                                                           "risk":  {
+                                                                                                        "score":  55,
+                                                                                                        "level":  "HIGH",
+                                                                                                        "reasons":  [
+                                                                                                                        "Nokia Location Verification reports the pilgrim outside the configured safe area.",
+                                                                                                                        "Pilgrim is 450 m from their group.",
+                                                                                                                        "Device is reachable.",
+                                                                                                                        "Network congestion is Low."
+                                                                                                                    ],
+                                                                                                        "recommended_actions":  [
+                                                                                                                                    "Alert the pilgrim and assigned guide.",
+                                                                                                                                    "Guide pilgrim toward their group.",
+                                                                                                                                    "Avoid high-congestion areas."
+                                                                                                                                ],
+                                                                                                        "evidence":  [
+                                                                                                                         "outside_safe_zone",
+                                                                                                                         "group_separation",
+                                                                                                                         "device_reachable",
+                                                                                                                         "low_congestion"
+                                                                                                                     ]
+                                                                                                    },
+                                                                                           "confidence":  {
+                                                                                                              "score":  100,
+                                                                                                              "level":  "HIGH",
+                                                                                                              "signals_available":  3,
+                                                                                                              "signals_expected":  3,
+                                                                                                              "missing_signals":  [
+
+                                                                                                                                  ],
+                                                                                                              "stale_signals":  [
+
+                                                                                                                                ],
+                                                                                                              "evidence":  [
+                                                                                                                               "location_verification_available",
+                                                                                                                               "reachability_available",
+                                                                                                                               "congestion_available"
+                                                                                                                           ]
+                                                                                                          },
+                                                                                           "navigation":  {
+                                                                                                              "primary_action":  "RETURN_TO_GROUP",
+                                                                                                              "guidance":  "Return toward the assigned group or designated safe checkpoint.",
+                                                                                                              "distance_from_group_m":  450.0,
+                                                                                                              "congestion_level":  "LOW",
+                                                                                                              "actions":  [
+                                                                                                                              "Move toward group.",
+                                                                                                                              "Notify guide of separation."
+                                                                                                                          ]
+                                                                                                          },
+                                                                                           "emergency":  {
+                                                                                                             "triggered":  false
+                                                                                                         },
+                                                                                           "incident":  null,
+                                                                                           "telecom_errors":  [
+
+                                                                                                              ]
+                                                                                       }
+                                                                       },
+                                                                       {
+                                                                           "timestamp":  "2026-09-06T16:46:10.120736+00:00",
+                                                                           "type":  "sos",
+                                                                           "payload":  {
+                                                                                           "risk":  {
+                                                                                                        "score":  100,
+                                                                                                        "level":  "CRITICAL",
+                                                                                                        "reasons":  [
+                                                                                                                        "Pilgrim manually triggered SOS."
+                                                                                                                    ],
+                                                                                                        "recommended_actions":  [
+                                                                                                                                    "Escalate immediately to guide and command center.",
+                                                                                                                                    "Check current network reachability.",
+                                                                                                                                    "Request emergency Quality-on-Demand."
+                                                                                                                                ],
+                                                                                                        "evidence":  [
+                                                                                                                         "manual_sos"
+                                                                                                                     ]
+                                                                                                    },
+                                                                                           "confidence":  {
+                                                                                                              "score":  80,
+                                                                                                              "level":  "HIGH",
+                                                                                                              "signals_available":  2,
+                                                                                                              "signals_expected":  3,
+                                                                                                              "missing_signals":  [
+                                                                                                                                      "congestion"
+                                                                                                                                  ],
+                                                                                                              "stale_signals":  [
+
+                                                                                                                                ],
+                                                                                                              "evidence":  [
+                                                                                                                               "location_verification_available",
+                                                                                                                               "reachability_available"
+                                                                                                                           ]
+                                                                                                          },
+                                                                                           "navigation":  {
+                                                                                                              "primary_action":  "WAIT_FOR_GUIDE",
+                                                                                                              "guidance":  "Do not move into unfamiliar or high-risk areas. Stay in a safe position and wait for guide support.",
+                                                                                                              "distance_from_group_m":  null,
+                                                                                                              "congestion_level":  null,
+                                                                                                              "actions":  [
+                                                                                                                              "Notify assigned guide.",
+                                                                                                                              "Keep communication channel active."
+                                                                                                                          ]
+                                                                                                          },
+                                                                                           "emergency":  {
+                                                                                                             "triggered":  true,
+                                                                                                             "triggered_at":  "2026-09-06T16:46:09.796724+00:00",
+                                                                                                             "qod_requested":  true,
+                                                                                                             "qod":  {
+                                                                                                                         "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                                                                                                         "device":  {
+                                                                                                                                        "phoneNumber":  "+99999991000",
+                                                                                                                                        "ipv4Address":  {
+                                                                                                                                                            "publicAddress":  "233.252.0.2",
+                                                                                                                                                            "privateAddress":  "192.0.2.25",
+                                                                                                                                                            "publicPort":  80
+                                                                                                                                                        }
+                                                                                                                                    },
+                                                                                                                         "applicationServer":  {
+                                                                                                                                                   "ipv4Address":  "8.8.8.8"
+                                                                                                                                               },
+                                                                                                                         "sessionId":  "f6567d39-061d-4eb8-a393-306a82b2ba3f",
+                                                                                                                         "qosStatus":  "REQUESTED",
+                                                                                                                         "duration":  60
+                                                                                                                     },
+                                                                                                             "errors":  [
+
+                                                                                                                        ]
+                                                                                                         },
+                                                                                           "incident":  {
+                                                                                                            "id":  "60715a25-3d07-488a-8f6a-be371f29b2da",
+                                                                                                            "type":  "SOS",
+                                                                                                            "status":  "OPEN",
+                                                                                                            "agency_id":  "demo-agency-001",
+                                                                                                            "group_id":  "demo-group-001",
+                                                                                                            "pilgrim_id":  "demo-pilgrim-001",
+                                                                                                            "guide_id":  "demo-guide-001",
+                                                                                                            "risk_score":  100,
+                                                                                                            "risk_level":  "CRITICAL",
+                                                                                                            "confidence_score":  80,
+                                                                                                            "confidence_level":  "HIGH",
+                                                                                                            "navigation_action":  "WAIT_FOR_GUIDE",
+                                                                                                            "evidence":  [
+                                                                                                                             "manual_sos"
+                                                                                                                         ],
+                                                                                                            "created_at":  "2026-09-06T16:35:45.700617Z",
+                                                                                                            "acknowledged_at":  null,
+                                                                                                            "resolved_at":  null
+                                                                                                        },
+                                                                                           "telecom_errors":  [
+
+                                                                                                              ]
+                                                                                       }
+                                                                       },
+                                                                       {
+                                                                           "timestamp":  "2026-09-06T16:46:10.120724+00:00",
+                                                                           "type":  "risk-analysis",
+                                                                           "payload":  {
+                                                                                           "risk":  {
+                                                                                                        "score":  100,
+                                                                                                        "level":  "CRITICAL",
+                                                                                                        "reasons":  [
+                                                                                                                        "Pilgrim manually triggered SOS."
+                                                                                                                    ],
+                                                                                                        "recommended_actions":  [
+                                                                                                                                    "Escalate immediately to guide and command center.",
+                                                                                                                                    "Check current network reachability.",
+                                                                                                                                    "Request emergency Quality-on-Demand."
+                                                                                                                                ],
+                                                                                                        "evidence":  [
+                                                                                                                         "manual_sos"
+                                                                                                                     ]
+                                                                                                    },
+                                                                                           "confidence":  {
+                                                                                                              "score":  80,
+                                                                                                              "level":  "HIGH",
+                                                                                                              "signals_available":  2,
+                                                                                                              "signals_expected":  3,
+                                                                                                              "missing_signals":  [
+                                                                                                                                      "congestion"
+                                                                                                                                  ],
+                                                                                                              "stale_signals":  [
+
+                                                                                                                                ],
+                                                                                                              "evidence":  [
+                                                                                                                               "location_verification_available",
+                                                                                                                               "reachability_available"
+                                                                                                                           ]
+                                                                                                          },
+                                                                                           "navigation":  {
+                                                                                                              "primary_action":  "WAIT_FOR_GUIDE",
+                                                                                                              "guidance":  "Do not move into unfamiliar or high-risk areas. Stay in a safe position and wait for guide support.",
+                                                                                                              "distance_from_group_m":  null,
+                                                                                                              "congestion_level":  null,
+                                                                                                              "actions":  [
+                                                                                                                              "Notify assigned guide.",
+                                                                                                                              "Keep communication channel active."
+                                                                                                                          ]
+                                                                                                          },
+                                                                                           "emergency":  {
+                                                                                                             "triggered":  true,
+                                                                                                             "triggered_at":  "2026-09-06T16:46:09.796724+00:00",
+                                                                                                             "qod_requested":  true,
+                                                                                                             "qod":  {
+                                                                                                                         "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                                                                                                         "device":  {
+                                                                                                                                        "phoneNumber":  "+99999991000",
+                                                                                                                                        "ipv4Address":  {
+                                                                                                                                                            "publicAddress":  "233.252.0.2",
+                                                                                                                                                            "privateAddress":  "192.0.2.25",
+                                                                                                                                                            "publicPort":  80
+                                                                                                                                                        }
+                                                                                                                                    },
+                                                                                                                         "applicationServer":  {
+                                                                                                                                                   "ipv4Address":  "8.8.8.8"
+                                                                                                                                               },
+                                                                                                                         "sessionId":  "f6567d39-061d-4eb8-a393-306a82b2ba3f",
+                                                                                                                         "qosStatus":  "REQUESTED",
+                                                                                                                         "duration":  60
+                                                                                                                     },
+                                                                                                             "errors":  [
+
+                                                                                                                        ]
+                                                                                                         },
+                                                                                           "incident":  {
+                                                                                                            "id":  "60715a25-3d07-488a-8f6a-be371f29b2da",
+                                                                                                            "type":  "SOS",
+                                                                                                            "status":  "OPEN",
+                                                                                                            "agency_id":  "demo-agency-001",
+                                                                                                            "group_id":  "demo-group-001",
+                                                                                                            "pilgrim_id":  "demo-pilgrim-001",
+                                                                                                            "guide_id":  "demo-guide-001",
+                                                                                                            "risk_score":  100,
+                                                                                                            "risk_level":  "CRITICAL",
+                                                                                                            "confidence_score":  80,
+                                                                                                            "confidence_level":  "HIGH",
+                                                                                                            "navigation_action":  "WAIT_FOR_GUIDE",
+                                                                                                            "evidence":  [
+                                                                                                                             "manual_sos"
+                                                                                                                         ],
+                                                                                                            "created_at":  "2026-09-06T16:35:45.700617Z",
+                                                                                                            "acknowledged_at":  null,
+                                                                                                            "resolved_at":  null
+                                                                                                        },
+                                                                                           "telecom_errors":  [
+
+                                                                                                              ]
+                                                                                       }
+                                                                       },
+                                                                       {
+                                                                           "timestamp":  "2026-09-06T16:37:55.512131+00:00",
+                                                                           "type":  "sos",
+                                                                           "payload":  {
+                                                                                           "risk":  {
+                                                                                                        "score":  100,
+                                                                                                        "level":  "CRITICAL",
+                                                                                                        "reasons":  [
+                                                                                                                        "Pilgrim manually triggered SOS."
+                                                                                                                    ],
+                                                                                                        "recommended_actions":  [
+                                                                                                                                    "Escalate immediately to guide and command center.",
+                                                                                                                                    "Check current network reachability.",
+                                                                                                                                    "Request emergency Quality-on-Demand."
+                                                                                                                                ],
+                                                                                                        "evidence":  [
+                                                                                                                         "manual_sos"
+                                                                                                                     ]
+                                                                                                    },
+                                                                                           "confidence":  {
+                                                                                                              "score":  80,
+                                                                                                              "level":  "HIGH",
+                                                                                                              "signals_available":  2,
+                                                                                                              "signals_expected":  3,
+                                                                                                              "missing_signals":  [
+                                                                                                                                      "congestion"
+                                                                                                                                  ],
+                                                                                                              "stale_signals":  [
+
+                                                                                                                                ],
+                                                                                                              "evidence":  [
+                                                                                                                               "location_verification_available",
+                                                                                                                               "reachability_available"
+                                                                                                                           ]
+                                                                                                          },
+                                                                                           "navigation":  {
+                                                                                                              "primary_action":  "WAIT_FOR_GUIDE",
+                                                                                                              "guidance":  "Do not move into unfamiliar or high-risk areas. Stay in a safe position and wait for guide support.",
+                                                                                                              "distance_from_group_m":  null,
+                                                                                                              "congestion_level":  null,
+                                                                                                              "actions":  [
+                                                                                                                              "Notify assigned guide.",
+                                                                                                                              "Keep communication channel active."
+                                                                                                                          ]
+                                                                                                          },
+                                                                                           "emergency":  {
+                                                                                                             "triggered":  true,
+                                                                                                             "triggered_at":  "2026-09-06T16:37:55.162478+00:00",
+                                                                                                             "qod_requested":  true,
+                                                                                                             "qod":  {
+                                                                                                                         "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                                                                                                         "device":  {
+                                                                                                                                        "phoneNumber":  "+99999991000",
+                                                                                                                                        "ipv4Address":  {
+                                                                                                                                                            "publicAddress":  "233.252.0.2",
+                                                                                                                                                            "privateAddress":  "192.0.2.25",
+                                                                                                                                                            "publicPort":  80
+                                                                                                                                                        }
+                                                                                                                                    },
+                                                                                                                         "applicationServer":  {
+                                                                                                                                                   "ipv4Address":  "8.8.8.8"
+                                                                                                                                               },
+                                                                                                                         "sessionId":  "16e45b89-5b6a-41c1-8b96-d7fa05f98d4f",
+                                                                                                                         "qosStatus":  "REQUESTED",
+                                                                                                                         "duration":  60
+                                                                                                                     },
+                                                                                                             "errors":  [
+
+                                                                                                                        ]
+                                                                                                         },
+                                                                                           "incident":  {
+                                                                                                            "id":  "60715a25-3d07-488a-8f6a-be371f29b2da",
+                                                                                                            "type":  "SOS",
+                                                                                                            "status":  "OPEN",
+                                                                                                            "agency_id":  "demo-agency-001",
+                                                                                                            "group_id":  "demo-group-001",
+                                                                                                            "pilgrim_id":  "demo-pilgrim-001",
+                                                                                                            "guide_id":  "demo-guide-001",
+                                                                                                            "risk_score":  100,
+                                                                                                            "risk_level":  "CRITICAL",
+                                                                                                            "confidence_score":  80,
+                                                                                                            "confidence_level":  "HIGH",
+                                                                                                            "navigation_action":  "WAIT_FOR_GUIDE",
+                                                                                                            "evidence":  [
+                                                                                                                             "manual_sos"
+                                                                                                                         ],
+                                                                                                            "created_at":  "2026-09-06T16:35:45.700617Z",
+                                                                                                            "acknowledged_at":  null,
+                                                                                                            "resolved_at":  null
+                                                                                                        },
+                                                                                           "telecom_errors":  [
+
+                                                                                                              ]
+                                                                                       }
+                                                                       },
+                                                                       {
+                                                                           "timestamp":  "2026-09-06T16:37:55.512116+00:00",
+                                                                           "type":  "risk-analysis",
+                                                                           "payload":  {
+                                                                                           "risk":  {
+                                                                                                        "score":  100,
+                                                                                                        "level":  "CRITICAL",
+                                                                                                        "reasons":  [
+                                                                                                                        "Pilgrim manually triggered SOS."
+                                                                                                                    ],
+                                                                                                        "recommended_actions":  [
+                                                                                                                                    "Escalate immediately to guide and command center.",
+                                                                                                                                    "Check current network reachability.",
+                                                                                                                                    "Request emergency Quality-on-Demand."
+                                                                                                                                ],
+                                                                                                        "evidence":  [
+                                                                                                                         "manual_sos"
+                                                                                                                     ]
+                                                                                                    },
+                                                                                           "confidence":  {
+                                                                                                              "score":  80,
+                                                                                                              "level":  "HIGH",
+                                                                                                              "signals_available":  2,
+                                                                                                              "signals_expected":  3,
+                                                                                                              "missing_signals":  [
+                                                                                                                                      "congestion"
+                                                                                                                                  ],
+                                                                                                              "stale_signals":  [
+
+                                                                                                                                ],
+                                                                                                              "evidence":  [
+                                                                                                                               "location_verification_available",
+                                                                                                                               "reachability_available"
+                                                                                                                           ]
+                                                                                                          },
+                                                                                           "navigation":  {
+                                                                                                              "primary_action":  "WAIT_FOR_GUIDE",
+                                                                                                              "guidance":  "Do not move into unfamiliar or high-risk areas. Stay in a safe position and wait for guide support.",
+                                                                                                              "distance_from_group_m":  null,
+                                                                                                              "congestion_level":  null,
+                                                                                                              "actions":  [
+                                                                                                                              "Notify assigned guide.",
+                                                                                                                              "Keep communication channel active."
+                                                                                                                          ]
+                                                                                                          },
+                                                                                           "emergency":  {
+                                                                                                             "triggered":  true,
+                                                                                                             "triggered_at":  "2026-09-06T16:37:55.162478+00:00",
+                                                                                                             "qod_requested":  true,
+                                                                                                             "qod":  {
+                                                                                                                         "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                                                                                                         "device":  {
+                                                                                                                                        "phoneNumber":  "+99999991000",
+                                                                                                                                        "ipv4Address":  {
+                                                                                                                                                            "publicAddress":  "233.252.0.2",
+                                                                                                                                                            "privateAddress":  "192.0.2.25",
+                                                                                                                                                            "publicPort":  80
+                                                                                                                                                        }
+                                                                                                                                    },
+                                                                                                                         "applicationServer":  {
+                                                                                                                                                   "ipv4Address":  "8.8.8.8"
+                                                                                                                                               },
+                                                                                                                         "sessionId":  "16e45b89-5b6a-41c1-8b96-d7fa05f98d4f",
+                                                                                                                         "qosStatus":  "REQUESTED",
+                                                                                                                         "duration":  60
+                                                                                                                     },
+                                                                                                             "errors":  [
+
+                                                                                                                        ]
+                                                                                                         },
+                                                                                           "incident":  {
+                                                                                                            "id":  "60715a25-3d07-488a-8f6a-be371f29b2da",
+                                                                                                            "type":  "SOS",
+                                                                                                            "status":  "OPEN",
+                                                                                                            "agency_id":  "demo-agency-001",
+                                                                                                            "group_id":  "demo-group-001",
+                                                                                                            "pilgrim_id":  "demo-pilgrim-001",
+                                                                                                            "guide_id":  "demo-guide-001",
+                                                                                                            "risk_score":  100,
+                                                                                                            "risk_level":  "CRITICAL",
+                                                                                                            "confidence_score":  80,
+                                                                                                            "confidence_level":  "HIGH",
+                                                                                                            "navigation_action":  "WAIT_FOR_GUIDE",
+                                                                                                            "evidence":  [
+                                                                                                                             "manual_sos"
+                                                                                                                         ],
+                                                                                                            "created_at":  "2026-09-06T16:35:45.700617Z",
+                                                                                                            "acknowledged_at":  null,
+                                                                                                            "resolved_at":  null
+                                                                                                        },
+                                                                                           "telecom_errors":  [
+
+                                                                                                              ]
+                                                                                       }
+                                                                       }
+                                                                   ]
+                                             },
+                          "qod_session":  {
+                                              "qosProfile":  "DOWNLINK_M_UPLINK_L",
+                                              "device":  {
+                                                             "phoneNumber":  "+99999991000",
+                                                             "ipv4Address":  {
+                                                                                 "publicAddress":  "233.252.0.2",
+                                                                                 "privateAddress":  "192.0.2.25",
+                                                                                 "publicPort":  80
+                                                                             }
+                                                         },
+                                              "applicationServer":  {
+                                                                        "ipv4Address":  "8.8.8.8"
+                                                                    },
+                                              "sessionId":  "f6567d39-061d-4eb8-a393-306a82b2ba3f",
+                                              "qosStatus":  "REQUESTED",
+                                              "duration":  60
+                                          },
+                          "telecom_sources":  {
+                                                  "location_verification":  {
+                                                                                "source":  "live-nokia"
+                                                                            },
+                                                  "reachability":  {
+                                                                       "source":  "live-nokia"
+                                                                   },
+                                                  "congestion":  {
+                                                                     "source":  "live-nokia",
+                                                                     "simulator_device":  "+36719991000"
+                                                                 }
+                                              }
+                      }
+}

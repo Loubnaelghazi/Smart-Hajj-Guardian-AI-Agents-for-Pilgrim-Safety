@@ -1,0 +1,26 @@
+name: smart_hajj_mobile
+description: Pilgrim group safety companion for the existing Smart Hajj Guardian backend.
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ^3.13.2
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^3.4.3
+  dio: ^5.11.1
+  shared_preferences: ^2.5.5
+  go_router: ^18.0.1
+  url_launcher: ^6.3.2
+  geolocator: ^14.0.3
+  connectivity_plus: ^7.3.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+flutter:
+  uses-material-design: true

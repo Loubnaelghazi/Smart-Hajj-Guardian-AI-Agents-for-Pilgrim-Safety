@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Hajj Guardian - Render (backend heberge)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "toolArgs": ["--dart-define=API_BASE_URL=https://smart-hajj-guardian-ai-agents-for.onrender.com"]
+    },
+    {
+      "name": "Hajj Guardian - Docker local (emulateur Android)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "toolArgs": ["--dart-define=API_BASE_URL=http://10.0.2.2:8000"]
+    }
+  ]
+}

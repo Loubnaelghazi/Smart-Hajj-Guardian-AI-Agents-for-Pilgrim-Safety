@@ -1,3 +1,5 @@
+import SafeZoneMap from "../components/SafeZoneMap";
+import { zonePayload } from "../services/safeZone";
 import { t } from "../i18n";import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
@@ -144,14 +146,8 @@ export default function GroupDetailsPage({
     setBusy(true);
     setError("");
 
-    const payload = {
-      name: zoneForm.name,
-      latitude: Number(zoneForm.latitude),
-      longitude: Number(zoneForm.longitude),
-      radius_m: Number(zoneForm.radius_m)
-    };
-
     try {
+      const payload = zonePayload(zoneForm);
       if (safeZone) {
         await api.updateSafeZone(groupId, payload);
       } else {
@@ -387,6 +383,7 @@ export default function GroupDetailsPage({
 
       {t(modal?.type === "safe-zone" &&
       <Modal
+        width={840}
         title={t(safeZone ? "Edit safe zone" : "Configure safe zone")}
         onClose={() => setModal(null)}>
 
@@ -404,11 +401,13 @@ export default function GroupDetailsPage({
 
             </label>
 
+            <SafeZoneMap value={zoneForm} onChange={(point) => setZoneForm(current => ({...current, ...point}))} />
+            <details>
+              <summary>{t('Advanced: coordinates')}</summary>
             <div className="form-grid-2">
               <label>{t(" Latitude ")}
 
               <input
-                required
                 type="number"
                 step="any"
                 value={zoneForm.latitude}
@@ -424,7 +423,6 @@ export default function GroupDetailsPage({
               <label>{t(" Longitude ")}
 
               <input
-                required
                 type="number"
                 step="any"
                 value={zoneForm.longitude}
@@ -437,6 +435,8 @@ export default function GroupDetailsPage({
 
               </label>
             </div>
+
+            </details>
 
             <label>{t(" Radius (meters) ")}
 

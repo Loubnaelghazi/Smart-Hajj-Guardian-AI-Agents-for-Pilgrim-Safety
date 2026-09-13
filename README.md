@@ -113,6 +113,6 @@ Use a pilgrim phone registered in the hosted dashboard. The mobile app calls the
 
 ## Author
 
-**Loubna El Ghazi** ? AI & Cybersecurity PhD student, Abdelmalek Essaadi University, C3S Lab, Morocco.
+**Loubna El Ghazi**  AI & Cybersecurity PhD student, Abdelmalek Essaadi University, C3S Lab, Morocco.
 
 [LinkedIn](https://www.linkedin.com/in/loubna-el-ghazi/)
